@@ -1,11 +1,14 @@
-// Style
+// components
+import { Header } from "./components/Header";
+
+// style
 import { GlobalStyle } from "./style/global";
 
 export function App() {
 	return (
 		<>
+			<Header />
 			<GlobalStyle />
-			<h1>Hora de ficar rico</h1>
 		</>
 	);
 }
