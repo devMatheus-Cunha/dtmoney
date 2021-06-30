@@ -1,27 +1,22 @@
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent } from "react"
+import { useTable } from "../../hooks/useTable"
 import { database } from "../../services/firebase"
-import { useRoom } from "../hooks/useRoom";
 
 // style compoent
 import { Container } from "./style"
 
 export function TransactionsTable() {
-	const { tables } = useRoom("-MdOEkma0tXZvWzZTifI")
-
-	useEffect(() => {
-	console.log(tables)
-	}, [])
+	const { tables } = useTable()
 
 	async function handleNewTransition(event: FormEvent) {
 		event.preventDefault()
 
-		const roomRef = database.ref("tables")
+		const tableRef = database.ref("tables")
 
-		await roomRef.push({
+		await tableRef.push({
 			title: "Site Vendido",
-			value: "12,000",
+			price: "12,000",
 			category: "Desenvolvimento",
-			date: new Date(),
 			authorId: "kdklçaskdlçakslç",
 		})
 	}
@@ -39,25 +34,27 @@ export function TransactionsTable() {
 				</thead>
 
 				<tbody>
-					{
-						tables.map((table) => {
-							return (
-								<>
-									<tr>
-										<td>{table.title}</td>
-										<td className="deposit">{`R$ ${table.value}`}</td>
-										<td>{table.category}</td>
-										<td>20/12/2020</td>
+					<>
+						{
+							tables.map((table) => {
+								return (
+									<tr key={table.id}>
+										<>
+											<td>{table.title}</td>
+											<td className="deposit">{`R$ ${table.price}`}</td>
+											<td>{table.category}</td>
+											<td>{table.createdAt}</td>
+										</>
 									</tr>
-								</>
-							)
-						})
-					}
+								)
+							})
+						}
+					</>
 				</tbody>
 			</table>
 			<form onSubmit={handleNewTransition}>
 				<button type="submit">
-					Criar sala
+					Criar tabela
 				</button>
 			</form>
 		</Container>

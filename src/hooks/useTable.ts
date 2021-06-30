@@ -1,52 +1,56 @@
 import { useEffect, useState } from "react"
-import { database } from "../../services/firebase"
+import { database } from "../services/firebase"
 
 // Type
 type QuestionType = {
-  id: string,
+  id: string | null,
   author: string,
   title: string,
-  value: string,
+  price: string,
   category: string,
+  createdAt: string,
 }
 
 type firebaseTableTypes = Record<string, {
-  author: string,
+  authorId: string,
   title: string,
-  value: string,
+  price: string,
   category: string,
 }>
 
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
-export function useRoom(tableId: string) {
-	// State
+export function useTable() {
 	const [tables, setTables] = useState<QuestionType[]>([])
 
 	useEffect(() => {
-		const roomRef = database.ref(`tables/${tableId}`)
+		const tableRef = database.ref("tables")
 
-		roomRef.on("value", (room) => {
+		tableRef.on("value", (room) => {
 			const databaseTables = room.val()
-			const firebaseTable: firebaseTableTypes = databaseTables.tables ?? {}
+
+			const firebaseTable: firebaseTableTypes = databaseTables ?? {}
 
 			const parsedtable = Object.entries(firebaseTable).map(([key, value]) => {
+				const toDateString = new Date().toDateString()
+				const dateFormted = toDateString.substring(4)
 				return {
 					id: key,
-					author: value.author,
+					author: value.authorId,
 					title: value.title,
-					value: value.value,
+					price: value.price,
 					category: value.category,
+					createdAt: dateFormted,
 				}
 			})
 			setTables(parsedtable)
 		})
 
 		return () => {
-			roomRef.off("value")
+			tableRef.off("value")
 		}
-	}, [tableId])
+	}, [])
 
 	return { tables }
 }
