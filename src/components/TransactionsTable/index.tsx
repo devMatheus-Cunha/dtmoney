@@ -6,8 +6,10 @@ import { database } from "../../services/firebase"
 import { Container } from "./style"
 
 export function TransactionsTable() {
+	// Hooks
 	const { tables } = useTable()
 
+	// Fucntions
 	async function handleNewTransition(event: FormEvent) {
 		event.preventDefault()
 
@@ -23,35 +25,44 @@ export function TransactionsTable() {
 
 	return (
 		<Container>
-			<table>
-				<thead>
-					<tr>
-						<th>Título</th>
-						<th>Valor</th>
-						<th>Categoria</th>
-						<th>Data</th>
-					</tr>
-				</thead>
+			{
+				tables.length > 0 ? (
+					<table>
+						<thead>
+							<tr>
+								<th>Título</th>
+								<th>Valor</th>
+								<th>Categoria</th>
+								<th>Data</th>
+							</tr>
+						</thead>
 
-				<tbody>
-					<>
-						{
-							tables.map((table) => {
-								return (
-									<tr key={table.id}>
-										<>
-											<td>{table.title}</td>
-											<td className="deposit">{`R$ ${table.price}`}</td>
-											<td>{table.category}</td>
-											<td>{table.createdAt}</td>
-										</>
-									</tr>
-								)
-							})
-						}
-					</>
-				</tbody>
-			</table>
+						<tbody>
+							<>
+								{
+									tables.map((table) => {
+										return (
+											<tr key={table.id}>
+												<>
+													<td>{table.title}</td>
+													<td className="deposit">{`R$ ${table.price}`}</td>
+													<td>{table.category}</td>
+													<td>{table.createdAt}</td>
+												</>
+											</tr>
+										)
+									})
+								}
+							</>
+						</tbody>
+					</table>
+				) : (
+					<h3>Nenhum dado foi adicionado até o momento</h3>
+				)
+			}
+			<br />
+			<br />
+			<br />
 			<form onSubmit={handleNewTransition}>
 				<button type="submit">
 					Criar tabela
