@@ -2,16 +2,16 @@ import { useEffect, useState } from "react"
 import { database } from "../services/firebase"
 
 // Type
-type QuestionType = {
+type TransactionType = {
   id: string | null,
   title: string,
   price: string,
   category: string,
-  createdAt: string,
 	type: string,
+  createdAt: string,
 }
 
-type firebaseTableTypes = Record<string, {
+type firebaseTransactionTypes = Record<string, {
   title: string,
   price: string,
   category: string,
@@ -21,20 +21,20 @@ type firebaseTableTypes = Record<string, {
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
-export function useTable() {
-	const [tables, setTables] = useState<QuestionType[]>([])
+export function useTransactions() {
+	const [transacitons, setTransacitons] = useState<TransactionType[]>([])
 
 	useEffect(() => {
-		const tableRef = database.ref("tables")
+		const transacitonRef = database.ref("transacitons")
 
-		tableRef.on("value", (room) => {
-			const databaseTables = room.val()
+		transacitonRef.on("value", (room) => {
+			const databasetransacitons = room.val()
 
-			const firebaseTable: firebaseTableTypes = databaseTables ?? {}
+			const firebaseTransaciton: firebaseTransactionTypes = databasetransacitons ?? {}
 
-			const parsedtable = Object.entries(firebaseTable).map(([key, value]) => {
+			const parsedtable = Object.entries(firebaseTransaciton).map(([key, value]) => {
 				const toDateString = new Date().toDateString()
-				const dateFormted = toDateString.substring(4)
+				const dateFormted = toDateString.substring(1)
 				return {
 					id: key,
 					title: value.title,
@@ -44,13 +44,13 @@ export function useTable() {
 					createdAt: dateFormted,
 				}
 			})
-			setTables(parsedtable)
+			setTransacitons(parsedtable)
 		})
 
 		return () => {
-			tableRef.off("value")
+			transacitonRef.off("value")
 		}
 	}, [])
 
-	return { tables }
+	return { transacitons }
 }

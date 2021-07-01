@@ -32,7 +32,7 @@ export function NewTransactionModal({
 	async function handleCreateNewTransaction(event: FormEvent) {
 		event.preventDefault()
 
-		const tableRef = database.ref("tables")
+		const tableRef = database.ref("transacitons")
 
 		const data = {
 			id: "1",

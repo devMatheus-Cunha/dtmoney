@@ -1,16 +1,17 @@
-import { useTable } from "../../hooks/useTable"
+/* eslint-disable max-len */
+import { useTransactions } from "../../hooks/useTable"
 
 // style compoent
 import { Container } from "./style"
 
 export function TransactionsTable() {
 	// Hooks
-	const { tables } = useTable()
+	const { transacitons } = useTransactions()
 
 	return (
 		<Container>
 			{
-				tables.length > 0 ? (
+				transacitons.length > 0 ? (
 					<table>
 						<thead>
 							<tr>
@@ -24,14 +25,25 @@ export function TransactionsTable() {
 						<tbody>
 							<>
 								{
-									tables.map((table) => {
+									transacitons.map((value) => {
 										return (
-											<tr key={table.id}>
+											<tr key={value.id}>
 												<>
-													<td>{table.title}</td>
-													<td className="deposit">{`R$ ${table.price}`}</td>
-													<td>{table.category}</td>
-													<td>{table.createdAt}</td>
+													<td>{value.title}</td>
+													<td className={value.type}>
+														{
+															new Intl.NumberFormat("pt-BR", {
+																style: "currency",
+																currency: "BRL",
+															}).format(value.price as unknown as number)
+														}
+													</td>
+													<td>{value.category}</td>
+													<td>
+														{new Intl.DateTimeFormat("pt-BR").format(
+															new Date(value.createdAt),
+														)}
+													</td>
 												</>
 											</tr>
 										)
