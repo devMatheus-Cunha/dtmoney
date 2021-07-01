@@ -16,10 +16,11 @@ export function TransactionsTable() {
 		const tableRef = database.ref("tables")
 
 		await tableRef.push({
+			id: "1",
 			title: "Site Vendido",
 			price: "12,000",
+			type: "deposit",
 			category: "Desenvolvimento",
-			authorId: "kdklçaskdlçakslç",
 		})
 	}
 

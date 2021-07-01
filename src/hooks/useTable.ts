@@ -4,18 +4,18 @@ import { database } from "../services/firebase"
 // Type
 type QuestionType = {
   id: string | null,
-  author: string,
   title: string,
   price: string,
   category: string,
   createdAt: string,
+	type: string,
 }
 
 type firebaseTableTypes = Record<string, {
-  authorId: string,
   title: string,
   price: string,
   category: string,
+	type: string,
 }>
 
 // -------------------------------------------------
@@ -37,10 +37,10 @@ export function useTable() {
 				const dateFormted = toDateString.substring(4)
 				return {
 					id: key,
-					author: value.authorId,
 					title: value.title,
 					price: value.price,
 					category: value.category,
+					type: value.type,
 					createdAt: dateFormted,
 				}
 			})
