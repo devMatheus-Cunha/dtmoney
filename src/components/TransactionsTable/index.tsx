@@ -1,6 +1,4 @@
-import { FormEvent } from "react"
 import { useTable } from "../../hooks/useTable"
-import { database } from "../../services/firebase"
 
 // style compoent
 import { Container } from "./style"
@@ -8,21 +6,6 @@ import { Container } from "./style"
 export function TransactionsTable() {
 	// Hooks
 	const { tables } = useTable()
-
-	// Fucntions
-	async function handleNewTransition(event: FormEvent) {
-		event.preventDefault()
-
-		const tableRef = database.ref("tables")
-
-		await tableRef.push({
-			id: "1",
-			title: "Site Vendido",
-			price: "12,000",
-			type: "deposit",
-			category: "Desenvolvimento",
-		})
-	}
 
 	return (
 		<Container>
@@ -61,14 +44,6 @@ export function TransactionsTable() {
 					<h3>Nenhum dado foi adicionado até o momento</h3>
 				)
 			}
-			<br />
-			<br />
-			<br />
-			<form onSubmit={handleNewTransition}>
-				<button type="submit">
-					Criar tabela
-				</button>
-			</form>
 		</Container>
 	)
 }
