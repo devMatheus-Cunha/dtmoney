@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import { useState, FormEvent } from "react";
+import { toast } from "react-toastify";
 import Modal from "react-modal";
 
 // database
@@ -10,8 +11,9 @@ import closeImg from "../../images/close.svg"
 import incomeImg from "../../images/income.svg"
 import outcomeImg from "../../images/outcome.svg"
 
-// style compoent
+// style
 import { Container, TransactionTypeContainer, RadioBox } from "./style"
+import "react-toastify/dist/ReactToastify.css";
 
 // interface
 interface NewTransactionModalProps {
@@ -42,10 +44,34 @@ export function NewTransactionModal({
 			type,
 		}
 
-		if (data.title.length && data.price.length && data.category.length && data.type.length > 0) {
+		const valuesTransactions = data.title.length && data.price.length && data.category.length && data.type.length
+
+		if (valuesTransactions > 0) {
+			toast.success("Transação adicionada com sucesso!", {
+				position: "top-right",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
 			await	onRequestClose()
 			 tableRef.push(data)
 		}
+
+		if (valuesTransactions <= 0) {
+			toast.warn("Preencha todos os campos!", {
+				position: "top-right",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+		}
+
 		setTitle("")
 		setPrice("")
 		setCategory("")
