@@ -10,10 +10,15 @@ import { database } from "../../services/firebase"
 import closeImg from "../../images/close.svg"
 import incomeImg from "../../images/income.svg"
 import outcomeImg from "../../images/outcome.svg"
+import alertImg from "../../images/alert-circle.svg"
+import checkImg from "../../images/check.svg"
 
 // style
 import { Container, TransactionTypeContainer, RadioBox } from "./style"
 import "react-toastify/dist/ReactToastify.css";
+
+// const
+import { ToastNotification } from "../../container/Toast"
 
 // interface
 interface NewTransactionModalProps {
@@ -47,29 +52,37 @@ export function NewTransactionModal({
 		const valuesTransactions = data.title.length && data.price.length && data.category.length && data.type.length
 
 		if (valuesTransactions > 0) {
-			toast.success("Transação adicionada com sucesso!", {
+			toast.success(<ToastNotification
+				type={checkImg}
+				content="Transação adicionada com sucesso!"
+			/>, {
 				position: "top-right",
-				autoClose: 3000,
+				autoClose: 3500,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
 			});
-			await	onRequestClose()
-			 tableRef.push(data)
+			await onRequestClose()
+			tableRef.push(data)
 		}
 
 		if (valuesTransactions <= 0) {
-			toast.warn("Preencha todos os campos!", {
-				position: "top-right",
-				autoClose: 3000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
+			toast.warn(
+				<ToastNotification
+					type={alertImg}
+					content="Preencha todos os campos"
+				/>, {
+					position: "top-right",
+					autoClose: 3000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				},
+			);
 		}
 
 		setTitle("")
@@ -106,7 +119,7 @@ export function NewTransactionModal({
 					// required
 					onChange={(event) => {
 						const numberForStrint = event.target.value.toString()
-						 setPrice(numberForStrint)
+						setPrice(numberForStrint)
 					}}
 
 				/>
