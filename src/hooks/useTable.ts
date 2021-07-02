@@ -3,7 +3,7 @@ import { database } from "../services/firebase"
 
 // Type
 type TransactionType = {
-  id: string | null,
+  id: string,
   title: string,
   price: string,
   category: string,
@@ -32,7 +32,7 @@ export function useTransactions() {
 
 			const firebaseTransaciton: firebaseTransactionTypes = databasetransacitons ?? {}
 
-			const parsedtable = Object.entries(firebaseTransaciton).map(([key, value]) => {
+			const parsedTransacion = Object.entries(firebaseTransaciton).map(([key, value]) => {
 				const toDateString = new Date().toDateString()
 				const dateFormted = toDateString.substring(1)
 				return {
@@ -44,7 +44,7 @@ export function useTransactions() {
 					createdAt: dateFormted,
 				}
 			})
-			setTransacitons(parsedtable)
+			setTransacitons(parsedTransacion)
 		})
 
 		return () => {

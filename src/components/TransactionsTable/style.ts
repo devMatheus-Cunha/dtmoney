@@ -33,6 +33,22 @@ table{
     &.withdraw{
       color: var(--red)
     }
+
+    
+  }
+
+  .action{
+    display:flex;
+    gap: 0.3rem;
+    button{
+      background: transparent;
+      border: none;
+
+      &:hover{
+        filter:brightness(0.9);
+      }
+    }
+   
   }
 }
 `

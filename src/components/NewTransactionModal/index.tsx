@@ -17,7 +17,7 @@ import checkImg from "../../images/check.svg"
 import { Container, TransactionTypeContainer, RadioBox } from "./style"
 import "react-toastify/dist/ReactToastify.css";
 
-// const
+// container
 import { ToastNotification } from "../../container/Toast"
 
 // interface
