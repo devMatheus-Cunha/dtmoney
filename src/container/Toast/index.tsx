@@ -1,5 +1,3 @@
-// Image
-
 // style
 import "./style.scss";
 

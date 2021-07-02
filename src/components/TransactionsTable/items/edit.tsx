@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import { useState, useEffect, FormEvent } from "react";
 import { toast } from "react-toastify";
 
@@ -20,11 +19,11 @@ import { ToastNotification } from "../../../container/Toast"
 // interface
 interface NewTransactionModalProps {
 	onRequestClose: () => void;
-	idTransaciton: string;
+	idTransaction: string;
 }
 
 export function RenderModalEdit({
-	onRequestClose, idTransaciton,
+	onRequestClose, idTransaction,
 }: NewTransactionModalProps) {
 	// state
 	const [title, setTitle] = useState("")
@@ -34,7 +33,7 @@ export function RenderModalEdit({
 	const [transactionsDatas, setTransactionsDatas] = useState<any>([]);
 
 	useEffect(() => {
-		const transacitonRef = database.ref(`transacitons/${idTransaciton}`)
+		const transacitonRef = database.ref(`transacitons/${idTransaction}`)
 
 		transacitonRef.on("value", (room) => {
 			const databasetransacitons = room.val()
@@ -44,13 +43,13 @@ export function RenderModalEdit({
 		return () => {
 			transacitonRef.off("value")
 		}
-	}, [idTransaciton])
+	}, [idTransaction])
 
 	// Fucntions
 	async function handleEditTransaciton(event: FormEvent) {
 		event.preventDefault()
 
-		await database.ref(`transacitons/${idTransaciton}/`).update({
+		await database.ref(`transacitons/${idTransaction}/`).update({
 			title: title || transactionsDatas.title,
 			price: price || transactionsDatas.price,
 			category: category || transactionsDatas.category,

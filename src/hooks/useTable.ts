@@ -22,17 +22,17 @@ type firebaseTransactionTypes = Record<string, {
 // Export Function
 // -------------------------------------------------
 export function useTransactions() {
-	const [transacitons, setTransacitons] = useState<TransactionType[]>([])
+	const [transactions, setTransactions] = useState<TransactionType[]>([])
 
 	useEffect(() => {
-		const transacitonRef = database.ref("transacitons")
+		const transactionRef = database.ref("transactions")
 
-		transacitonRef.on("value", (room) => {
-			const databasetransacitons = room.val()
+		transactionRef.on("value", (room) => {
+			const databasetransactions = room.val()
 
-			const firebaseTransaciton: firebaseTransactionTypes = databasetransacitons ?? {}
+			const firebaseTransaction: firebaseTransactionTypes = databasetransactions ?? {}
 
-			const parsedTransacion = Object.entries(firebaseTransaciton).map(([key, value]) => {
+			const parsedTransaction = Object.entries(firebaseTransaction).map(([key, value]) => {
 				const toDateString = new Date().toDateString()
 				const dateFormted = toDateString.substring(1)
 				return {
@@ -44,13 +44,13 @@ export function useTransactions() {
 					createdAt: dateFormted,
 				}
 			})
-			setTransacitons(parsedTransacion)
+			setTransactions(parsedTransaction)
 		})
 
 		return () => {
-			transacitonRef.off("value")
+			transactionRef.off("value")
 		}
 	}, [])
 
-	return { transacitons }
+	return { transactions }
 }

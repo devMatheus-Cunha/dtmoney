@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,11 +17,11 @@ import { ContainerDeleteTrasaction } from "../style";
 // interface
 interface NewTransactionModalProps {
   onRequestClose: () => void;
-  idTransaciton: string;
+  idTransaction: string;
 }
 
 export function RenderModalDelet({
-	onRequestClose, idTransaciton,
+	onRequestClose, idTransaction,
 }: NewTransactionModalProps) {
 	// functions
 	async function handleDeleteTransaction() {
@@ -39,7 +38,7 @@ export function RenderModalDelet({
 			draggable: true,
 			progress: undefined,
 		});
-		await database.ref(`transacitons/${idTransaciton}/`).remove()
+		await database.ref(`transacitons/${idTransaction}/`).remove()
 	}
 	return (
 		<>

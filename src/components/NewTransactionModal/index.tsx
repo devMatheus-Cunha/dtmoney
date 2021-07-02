@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import { useState, FormEvent } from "react";
 import { toast } from "react-toastify";
 import Modal from "react-modal";

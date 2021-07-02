@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { useState } from "react"
 import Modal from "react-modal";
 
@@ -18,17 +17,17 @@ import editImage from "../../images/edit-2.svg"
 
 export function TransactionsTable() {
 	// hooks
-	const { transacitons } = useTransactions()
+	const { transactions } = useTransactions()
 
 	// State
 	const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
 	const [deleteTransactionModalOpen, setDeleteTransactionModalOpen] = useState(false);
-	const [idTransaciton, setIdTransacitons] = useState("")
+	const [idTransaction, setIdTransactions] = useState("")
 
 	// open modal
 	function handleEditTransaction(id: string) {
 		setIsEditTransactionModalOpen(true)
-		setIdTransacitons(id)
+		setIdTransactions(id)
 	}
 
 	function handleClosenEditTransaction() {
@@ -38,7 +37,7 @@ export function TransactionsTable() {
 	// functionw
 	function handleOpenDeleteTransaction(id: string) {
 		setDeleteTransactionModalOpen(true)
-		setIdTransacitons(id)
+		setIdTransactions(id)
 	}
 
 	function handleClosedDeleteTransaction() {
@@ -55,7 +54,7 @@ export function TransactionsTable() {
 			>
 				<RenderModalEdit
 					onRequestClose={handleClosenEditTransaction}
-					idTransaciton={idTransaciton}
+					idTransaction={idTransaction}
 				/>
 			</Modal>
 			<Modal
@@ -66,11 +65,11 @@ export function TransactionsTable() {
 			>
 				<RenderModalDelet
 					onRequestClose={handleClosedDeleteTransaction}
-					idTransaciton={idTransaciton}
+					idTransaction={idTransaction}
 				/>
 			</Modal>
 			{
-				transacitons.length > 0 ? (
+				transactions.length > 0 ? (
 					<table>
 						<thead>
 							<tr>
@@ -85,7 +84,7 @@ export function TransactionsTable() {
 						<tbody>
 							<>
 								{
-									transacitons.map((value) => {
+									transactions.map((value) => {
 										return (
 											<tr key={value.id}>
 												<>
