@@ -39,10 +39,9 @@ export function NewTransactionModal({
 	async function handleCreateNewTransaction(event: FormEvent) {
 		event.preventDefault()
 
-		const tableRef = database.ref("transacitons")
+		const transacitonRef = database.ref("transacitons")
 
 		const data = {
-			id: "1",
 			title,
 			price,
 			category,
@@ -65,7 +64,7 @@ export function NewTransactionModal({
 				progress: undefined,
 			});
 			await onRequestClose()
-			tableRef.push(data)
+			transacitonRef.push(data)
 		}
 
 		if (valuesTransactions <= 0) {
@@ -110,13 +109,11 @@ export function NewTransactionModal({
 				<input
 					type="text"
 					placeholder="Título"
-					// required
 					onChange={(event) => setTitle(event.target.value)}
 				/>
 				<input
 					type="number"
 					placeholder="Valor"
-					// required
 					onChange={(event) => {
 						const numberForStrint = event.target.value.toString()
 						setPrice(numberForStrint)
@@ -150,7 +147,6 @@ export function NewTransactionModal({
 				<input
 					type="text"
 					placeholder="Categoria"
-					// required
 					onChange={(event) => setCategory(event.target.value)}
 				/>
 				<button type="submit">

@@ -21,12 +21,13 @@ export function App() {
 	function handleClosenNewTransaction() {
 		setIsNewTransactionModalOpen(false)
 	}
+
 	return (
 		<>
 			<Header onOpenNewTransaction={handleOpenNewTransaction} />
 			<Dashboard />
 			<NewTransactionModal
-				isOpen={isNewTransactionModalOpen}
+			 isOpen={isNewTransactionModalOpen}
 			 onRequestClose={handleClosenNewTransaction}
 			/>
 			<ToastContainer />

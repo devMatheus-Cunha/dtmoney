@@ -1,6 +1,13 @@
 /* eslint-disable max-len */
+import { useState } from "react"
+import Modal from "react-modal";
 import { toast } from "react-toastify"
+
+// hooks
 import { useTransactions } from "../../hooks/useTable"
+
+// renderForm
+import { RenderModal } from "./items/form"
 
 // style compoent
 import { Container } from "./style"
@@ -20,8 +27,22 @@ export function TransactionsTable() {
 	// hooks
 	const { transacitons } = useTransactions()
 
-	// functions
-	 async function handleDeleteQuesiton(transacitonId: string) {
+	// State
+	const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
+	const [idTransaciton, setIdTransacitons] = useState("")
+
+	// open modal
+	function handleOpenNewTransaction(id: string) {
+		setIsNewTransactionModalOpen(true)
+		setIdTransacitons(id)
+	}
+
+	function handleClosenNewTransaction() {
+		setIsNewTransactionModalOpen(false)
+	}
+
+	// functionw
+	 async function handleDeleteTransaction(transacitonId: string) {
 		 toast.success(<ToastNotification
 			type={checkImg}
 			content="Transação excluida com sucesso!"
@@ -36,8 +57,20 @@ export function TransactionsTable() {
 		});
 		await database.ref(`transacitons/${transacitonId}/`).remove()
 	}
+
 	return (
 		<Container>
+			<Modal
+				isOpen={isNewTransactionModalOpen}
+				onRequestClose={handleClosenNewTransaction}
+				overlayClassName="react-modal-overlay"
+				className="react-modal-content"
+			>
+				<RenderModal
+					onRequestClose={handleClosenNewTransaction}
+					idTransaciton={idTransaciton}
+				/>
+			</Modal>
 			{
 				transacitons.length > 0 ? (
 					<table>
@@ -76,14 +109,18 @@ export function TransactionsTable() {
 													<td className="action">
 														<button
 															type="button"
-															onClick={() => handleDeleteQuesiton(value.id)}
+															onClick={() => handleDeleteTransaction(value.id)}
 														>
 															<img
 																src={trashImage}
 																alt="Lixeira"
 															/>
 														</button>
-														<button type="button">
+														<button
+															type="button"
+															onClick={() => handleOpenNewTransaction(value.id)}
+
+														>
 															<img src={editImage} alt="Editar" />
 														</button>
 													</td>
@@ -100,5 +137,6 @@ export function TransactionsTable() {
 				)
 			}
 		</Container>
+
 	)
 }
