@@ -1,73 +1,71 @@
 /* eslint-disable max-len */
 import { useState } from "react"
 import Modal from "react-modal";
-import { toast } from "react-toastify"
 
 // hooks
 import { useTransactions } from "../../hooks/useTable"
 
 // renderForm
-import { RenderModal } from "./items/form"
+import { RenderModalEdit } from "./items/edit"
+import { RenderModalDelet } from "./items/delete"
 
 // style compoent
 import { Container } from "./style"
 
-// container
-import { ToastNotification } from "../../container/Toast"
-
-// database
-import { database } from "../../services/firebase"
-
 // image
 import trashImage from "../../images/trash-2.svg"
 import editImage from "../../images/edit-2.svg"
-import checkImg from "../../images/check.svg"
 
 export function TransactionsTable() {
 	// hooks
 	const { transacitons } = useTransactions()
 
 	// State
-	const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
+	const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
+	const [deleteTransactionModalOpen, setDeleteTransactionModalOpen] = useState(false);
 	const [idTransaciton, setIdTransacitons] = useState("")
 
 	// open modal
-	function handleOpenNewTransaction(id: string) {
-		setIsNewTransactionModalOpen(true)
+	function handleEditTransaction(id: string) {
+		setIsEditTransactionModalOpen(true)
 		setIdTransacitons(id)
 	}
 
-	function handleClosenNewTransaction() {
-		setIsNewTransactionModalOpen(false)
+	function handleClosenEditTransaction() {
+		setIsEditTransactionModalOpen(false)
 	}
 
 	// functionw
-	 async function handleDeleteTransaction(transacitonId: string) {
-		 toast.success(<ToastNotification
-			type={checkImg}
-			content="Transação excluida com sucesso!"
-		 />, {
-			position: "top-right",
-			autoClose: 3500,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		});
-		await database.ref(`transacitons/${transacitonId}/`).remove()
+	function handleOpenDeleteTransaction(id: string) {
+		setDeleteTransactionModalOpen(true)
+		setIdTransacitons(id)
+	}
+
+	function handleClosedDeleteTransaction() {
+		setDeleteTransactionModalOpen(false)
 	}
 
 	return (
 		<Container>
 			<Modal
-				isOpen={isNewTransactionModalOpen}
-				onRequestClose={handleClosenNewTransaction}
+				isOpen={isEditTransactionModalOpen}
+				onRequestClose={handleClosenEditTransaction}
 				overlayClassName="react-modal-overlay"
 				className="react-modal-content"
 			>
-				<RenderModal
-					onRequestClose={handleClosenNewTransaction}
+				<RenderModalEdit
+					onRequestClose={handleClosenEditTransaction}
+					idTransaciton={idTransaciton}
+				/>
+			</Modal>
+			<Modal
+				isOpen={deleteTransactionModalOpen}
+				onRequestClose={handleClosedDeleteTransaction}
+				overlayClassName="react-modal-overlay"
+				className="react-modal-content"
+			>
+				<RenderModalDelet
+					onRequestClose={handleClosedDeleteTransaction}
 					idTransaciton={idTransaciton}
 				/>
 			</Modal>
@@ -109,7 +107,7 @@ export function TransactionsTable() {
 													<td className="action">
 														<button
 															type="button"
-															onClick={() => handleDeleteTransaction(value.id)}
+															onClick={() => handleOpenDeleteTransaction(value.id)}
 														>
 															<img
 																src={trashImage}
@@ -118,8 +116,7 @@ export function TransactionsTable() {
 														</button>
 														<button
 															type="button"
-															onClick={() => handleOpenNewTransaction(value.id)}
-
+															onClick={() => handleEditTransaction(value.id)}
 														>
 															<img src={editImage} alt="Editar" />
 														</button>

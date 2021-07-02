@@ -23,7 +23,7 @@ interface NewTransactionModalProps {
 	idTransaciton: string;
 }
 
-export function RenderModal({
+export function RenderModalEdit({
 	onRequestClose, idTransaciton,
 }: NewTransactionModalProps) {
 	// state
