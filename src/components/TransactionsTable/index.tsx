@@ -129,7 +129,10 @@ export function TransactionsTable() {
 						</tbody>
 					</table>
 				) : (
-					<h3>Nenhum dado foi adicionado até o momento</h3>
+					<>
+						<h3>Nenhum dado foi adicionado até o momento</h3>
+
+					</>
 				)
 			}
 		</Container>

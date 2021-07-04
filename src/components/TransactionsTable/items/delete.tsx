@@ -38,7 +38,7 @@ export function RenderModalDelet({
 			draggable: true,
 			progress: undefined,
 		});
-		await database.ref(`transacitons/${idTransaction}/`).remove()
+		await database.ref(`transactions/${idTransaction}/`).remove()
 	}
 	return (
 		<>

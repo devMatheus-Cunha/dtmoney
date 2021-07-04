@@ -33,11 +33,11 @@ export function RenderModalEdit({
 	const [transactionsDatas, setTransactionsDatas] = useState<any>([]);
 
 	useEffect(() => {
-		const transacitonRef = database.ref(`transacitons/${idTransaction}`)
+		const transacitonRef = database.ref(`transactions/${idTransaction}`)
 
 		transacitonRef.on("value", (room) => {
-			const databasetransacitons = room.val()
-			setTransactionsDatas(databasetransacitons)
+			const databaseTransactions = room.val()
+			setTransactionsDatas(databaseTransactions)
 		})
 
 		return () => {
@@ -49,7 +49,7 @@ export function RenderModalEdit({
 	async function handleEditTransaciton(event: FormEvent) {
 		event.preventDefault()
 
-		await database.ref(`transacitons/${idTransaction}/`).update({
+		await database.ref(`transactions/${idTransaction}/`).update({
 			title: title || transactionsDatas.title,
 			price: price || transactionsDatas.price,
 			category: category || transactionsDatas.category,

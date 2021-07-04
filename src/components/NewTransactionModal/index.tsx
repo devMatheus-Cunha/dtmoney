@@ -38,7 +38,7 @@ export function NewTransactionModal({
 	async function handleCreateNewTransaction(event: FormEvent) {
 		event.preventDefault()
 
-		const transacitonRef = database.ref("transacitons")
+		const transacitonRef = database.ref("transactions")
 
 		const data = {
 			title,
