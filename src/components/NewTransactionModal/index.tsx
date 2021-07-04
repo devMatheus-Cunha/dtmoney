@@ -1,4 +1,5 @@
 import { useState, FormEvent } from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
 
@@ -25,9 +26,15 @@ interface NewTransactionModalProps {
 	onRequestClose: () => void;
 }
 
+// Type
+type TransactionsParams = {
+  id: string
+}
+
 export function NewTransactionModal({
 	isOpen, onRequestClose,
 }: NewTransactionModalProps) {
+	const params = useParams<TransactionsParams>()
 	// state
 	const [title, setTitle] = useState("")
 	const [price, setPrice] = useState("")
@@ -37,8 +44,6 @@ export function NewTransactionModal({
 	// Fucntions
 	async function handleCreateNewTransaction(event: FormEvent) {
 		event.preventDefault()
-
-		const transacitonRef = database.ref("transactions")
 
 		const data = {
 			title,
@@ -63,7 +68,7 @@ export function NewTransactionModal({
 				progress: undefined,
 			});
 			await onRequestClose()
-			transacitonRef.push(data)
+			database.ref(`transactions/${params.id}/newtransaction`).push(data)
 		}
 
 		if (valuesTransactions <= 0) {
@@ -103,6 +108,8 @@ export function NewTransactionModal({
 			>
 				<img src={closeImg} alt="Fechar modal" />
 			</button>
+			<button type="button" onClick={() => console.log(params)}>Teste</button>
+
 			<Container onSubmit={handleCreateNewTransaction}>
 				<h2>Cadastrar transação</h2>
 				<input

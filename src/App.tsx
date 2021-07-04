@@ -1,11 +1,16 @@
-import { useState } from "react";
+import {
+	BrowserRouter,
+	Route,
+	Switch,
+} from "react-router-dom";
 import Modal from "react-modal";
 import { ToastContainer } from "react-toastify";
 
 // components
-import { Dashboard } from "./components/Dashboard";
-import { Header } from "./components/Header";
-import { NewTransactionModal } from "./components/NewTransactionModal";
+import { Home } from "./pages/Home"
+import { Transactions } from "./pages/Transacitons"
+
+import { AuthProvider } from "./contexts/AuthContext"
 
 // style
 import { GlobalStyle } from "./style/global";
@@ -13,27 +18,23 @@ import { GlobalStyle } from "./style/global";
 Modal.setAppElement("#root");
 
 export function App() {
-	// state
-	const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
-
-	function handleOpenNewTransaction() {
-		setIsNewTransactionModalOpen(true)
-	}
-
-	function handleClosenNewTransaction() {
-		setIsNewTransactionModalOpen(false)
-	}
-
 	return (
 		<>
-			<Header onOpenNewTransaction={handleOpenNewTransaction} />
-			<Dashboard />
-			<NewTransactionModal
-			 isOpen={isNewTransactionModalOpen}
-			 onRequestClose={handleClosenNewTransaction}
-			/>
+			<BrowserRouter>
+
+				<AuthProvider>
+
+					<Switch>
+						<Route path="/" exact component={Home} />
+						<Route path="/transacitons" component={Transactions} />
+						<GlobalStyle />
+
+					</Switch>
+
+				</AuthProvider>
+			</BrowserRouter>
 			<ToastContainer />
-			<GlobalStyle />
+
 		</>
 	);
 }
