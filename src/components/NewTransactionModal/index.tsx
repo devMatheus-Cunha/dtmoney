@@ -68,7 +68,8 @@ export function NewTransactionModal({
 				progress: undefined,
 			});
 			await onRequestClose()
-			database.ref(`transactions/${params.id}/newtransaction`).push(data)
+			// database.ref(`transacitons/${params.id}/newtransaction`).push(data)
+			database.ref("transacitons/-MdnrCrj6RL79SBgt6zw/newtransaction").push(data)
 		}
 
 		if (valuesTransactions <= 0) {

@@ -1,10 +1,11 @@
 import {
-	FormEvent, useCallback, useState,
+	FormEvent, useCallback, useContext, useState,
 } from "react";
 import { toast } from "react-toastify";
 import {
 	useHistory,
 } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 // container
 import { ToastNotification } from "../../container/Toast"
@@ -24,6 +25,7 @@ import { authConfig } from "../../services/firebase";
 // -------------------------------------------------
 export function Home() {
 	const history = useHistory()
+	const { user } = useContext(AuthContext)
 
 	// State
 	const [emailUser, setEmailUser] = useState("")
@@ -62,41 +64,35 @@ export function Home() {
 		[emailUser, history, passwordUser],
 	);
 
-	// const loginHandler = useCallback(
-	// 	async (event) => {
-	// 		event.preventDefault();
+	const loginHandler = useCallback(
+		async (event) => {
+			event.preventDefault();
 
-	// 		try {
-	// 			await authConfig
-	// 				.auth()
-	// 				.signInWithEmailAndPassword(emailUser, passwordUser);
-	// 			history.push("/");
-	// 			console.log("Login");
-	// 		} catch (error) {
-	// 			toast.error(
-	// 				<ToastNotification
-	// 					type={alertImg}
-	// 					content="Dados informados estão incorretos!"
-	// 				/>, {
-	// 					position: "top-right",
-	// 					autoClose: 3000,
-	// 					hideProgressBar: false,
-	// 					closeOnClick: true,
-	// 					pauseOnHover: true,
-	// 					draggable: true,
-	// 					progress: undefined,
-	// 				},
-	// 			);
-	// 		}
-	// 		console.log("Login");
-	// 	},
-	// 	[emailUser, history, passwordUser],
-	// );
-
-	// const { user } = useContext(AuthContext);
-	// if (user) {
-	// 	return <Redirect to="/" />;
-	// }
+			try {
+				await authConfig
+					.auth()
+					.signInWithEmailAndPassword(emailUser, passwordUser);
+				history.push(`/transacitons/${user?.id}`)
+				console.log(user?.id);
+			} catch (error) {
+				toast.error(
+					<ToastNotification
+						type={alertImg}
+						content="Dados informados estão incorretos!"
+					/>, {
+						position: "top-right",
+						autoClose: 3000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					},
+				);
+			}
+		},
+		[emailUser, history, passwordUser, user?.id],
+	);
 
 	// -------------------------------------------------
 	// Render
