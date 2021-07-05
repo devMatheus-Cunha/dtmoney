@@ -8,7 +8,8 @@ import { ToastContainer } from "react-toastify";
 
 // components
 import { Home } from "./pages/Home"
-import { Transactions } from "./pages/Transacitons"
+import { Create } from "./pages/Home/Create";
+import { Transactions } from "./pages/Transactions"
 
 import { AuthProvider } from "./contexts/AuthContext"
 
@@ -26,7 +27,8 @@ export function App() {
 
 					<Switch>
 						<Route path="/" exact component={Home} />
-						<Route path="/transacitons" component={Transactions} />
+						<Route path="/sign" component={Create} />
+						<Route path="/transactions/:id" component={Transactions} />
 						<GlobalStyle />
 
 					</Switch>

@@ -5,45 +5,52 @@ import { toast } from "react-toastify";
 import {
 	useHistory,
 } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 // container
-import { ToastNotification } from "../../container/Toast"
+import { ToastNotification } from "../../../container/Toast"
 
 // Images
-import alertImg from "../../images/alert-circle.svg"
+import alertImg from "../../../images/alert-circle.svg"
 
 // Style
-import "./style.scss";
+import "../style.scss";
 
 // Detabase
-import { authConfig } from "../../services/firebase";
+import { database } from "../../../services/firebase";
+import { authConfig } from "../../../services/firebase";
 
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
-export function Home() {
+export function Create() {
 	const history = useHistory()
-	const { userId } = useContext(AuthContext)
+	const { setUserId } = useContext(AuthContext)
 
 	// State
 	const [emailUser, setEmailUser] = useState("")
 	const [passwordUser, setPasswordUser] = useState("")
 
-	const loginHandler = useCallback(
+	const signUpHandler = useCallback(
 		async (event) => {
 			event.preventDefault();
-
+			const createTransaciton = await database.ref("transactions")
 			try {
 				await authConfig
 					.auth()
-					.signInWithEmailAndPassword(emailUser, passwordUser);
-				history.push(`/transactions/${userId}`)
-			} catch (error) {
-				toast.error(
+					.createUserWithEmailAndPassword(emailUser, passwordUser);
+				const data = {
+					email: emailUser,
+					password: passwordUser,
+				}
+				const firebaseCreate = await createTransaciton.push(data)
+				setUserId(firebaseCreate.key)
+				history.push("/")
+			} catch (errors) {
+				await toast.error(
 					<ToastNotification
 						type={alertImg}
-						content="Dados informados estão incorretos!"
+						content="Já possui uma conta com estes dados"
 					/>, {
 						position: "top-right",
 						autoClose: 3000,
@@ -56,7 +63,7 @@ export function Home() {
 				);
 			}
 		},
-		[emailUser, history, passwordUser, userId],
+		[emailUser, history, passwordUser, setUserId],
 	);
 
 	// -------------------------------------------------
@@ -66,8 +73,8 @@ export function Home() {
 		<div id="page-auth">
 			<main>
 				<div className="main-content">
-					<div className="separator">Fazer Login</div>
-					<form onSubmit={loginHandler}>
+					<div className="separator">Criar tabela para controle financeiro</div>
+					<form onSubmit={signUpHandler}>
 						<input
 							type="email"
 							name="email"
@@ -81,9 +88,9 @@ export function Home() {
 							onChange={(event) => setPasswordUser(event.target.value)}
 						/>
 						<button className="button" type="submit">
-							Login
+							Criar
 						</button>
-						<p><a href="/sign">Criar conta</a></p>
+						<p><a href="/">Fazer Login</a></p>
 					</form>
 				</div>
 			</main>

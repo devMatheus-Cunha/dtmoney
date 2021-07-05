@@ -1,8 +1,9 @@
 import { useState } from "react"
 import Modal from "react-modal";
+import { useParams } from "react-router-dom";
 
 // hooks
-import { useTransactions } from "../../hooks/useTable"
+import { useTransactions } from "../../hooks/useTransactions"
 
 // renderForm
 import { RenderModalEdit } from "./items/edit"
@@ -15,9 +16,16 @@ import { Container } from "./style"
 import trashImage from "../../images/trash-2.svg"
 import editImage from "../../images/edit-2.svg"
 
+// Type
+type TransactionsParams = {
+  id: string
+}
+
 export function TransactionsTable() {
+	const params = useParams<TransactionsParams>()
+
 	// hooks
-	const { transactions } = useTransactions()
+	const { transactions } = useTransactions(params.id)
 
 	// State
 	const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);

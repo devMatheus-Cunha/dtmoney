@@ -68,8 +68,7 @@ export function NewTransactionModal({
 				progress: undefined,
 			});
 			await onRequestClose()
-			// database.ref(`transacitons/${params.id}/newtransaction`).push(data)
-			database.ref("transacitons/-MdnrCrj6RL79SBgt6zw/newtransaction").push(data)
+			database.ref(`transactions/${params.id}/newtransaction`).push(data)
 		}
 
 		if (valuesTransactions <= 0) {
@@ -109,7 +108,6 @@ export function NewTransactionModal({
 			>
 				<img src={closeImg} alt="Fechar modal" />
 			</button>
-			<button type="button" onClick={() => console.log(params)}>Teste</button>
 
 			<Container onSubmit={handleCreateNewTransaction}>
 				<h2>Cadastrar transação</h2>
