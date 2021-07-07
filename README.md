@@ -14,7 +14,7 @@ Project developed with the following technologies:
 
 ## 💻 Projeto
 
-#### dtmoney is a financial control application where we can create, edit and delete transactions and keep up-to-date on our spending. We also have the functionality to create an account where it generates a financial control table specific to that user.
+#### Dtmoney is a financial control application where we can create, edit and delete transactions and keep up-to-date on our spending. We also have the functionality to create an account where it generates a financial control table specific to that user.
 ---
 
 Por Matheus Gomes
