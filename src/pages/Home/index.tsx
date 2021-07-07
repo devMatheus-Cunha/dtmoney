@@ -11,6 +11,7 @@ import { ToastNotification } from "../../container/Toast"
 // images
 import alertImg from "../../assets/images/alert-circle.svg"
 import logo from "../../assets/images/logo.svg";
+import banner from "../../assets/images/banner.svg";
 
 // style
 import {
@@ -46,14 +47,14 @@ export function Home() {
 						type={alertImg}
 						content="Dados informados estão incorretos!"
 					/>, {
-						position: "top-right",
-						autoClose: 3000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-					},
+					position: "top-right",
+					autoClose: 3000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				},
 				);
 			}
 		},
@@ -99,6 +100,7 @@ export function Home() {
 							</h4>
 						</div>
 					</ContainerSideBar>
+					<img src={banner} alt="" />
 				</Wrapper>
 			</Container>
 		</>

@@ -17,6 +17,7 @@ import { authConfig } from "../../../services/firebase";
 // images
 import logo from "../../../assets/images/logo.svg";
 import alertImg from "../../../assets/images/alert-circle.svg"
+import banner from "../../../assets/images/banner.svg";
 
 /// style
 import {
@@ -57,14 +58,14 @@ export function Create() {
 						type={alertImg}
 						content="Já possui uma conta com estes dados"
 					/>, {
-						position: "top-right",
-						autoClose: 3000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-					},
+					position: "top-right",
+					autoClose: 3000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				},
 				);
 			}
 		},
@@ -112,6 +113,7 @@ export function Create() {
 							</h4>
 						</div>
 					</ContainerSideBar>
+						<img src={banner} alt="" />
 
 				</Wrapper>
 			</Container>

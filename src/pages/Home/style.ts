@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import das from "../../assets/images/Abstract-Envelope.svg";
 
 export const Container = styled.div`
   background:#33CC95;
@@ -11,13 +10,22 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  background-image: url(${das});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
   width: 100%;
   height: 100%;
   display: flex;
+
+
+  > img{
+    margin: 0 auto;
+    width: 40%;
+  }
+
+  @media (min-width: 1700px) {
+    > img{
+    margin: 0 auto;
+    width: 35%;
+  }
+  }
 `;
 
 export const LogoWrapper = styled.div`
