@@ -17,14 +17,14 @@ import alertImg from "../../images/alert-circle.svg"
 import "./style.scss";
 
 // Detabase
-import { authConfig } from "../../services/firebase";
+import { authConfig, database } from "../../services/firebase";
 
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
 export function Home() {
 	const history = useHistory()
-	const { userId } = useContext(AuthContext)
+	const { userId, setUser, user } = useContext(AuthContext)
 
 	// State
 	const [emailUser, setEmailUser] = useState("")
@@ -38,7 +38,7 @@ export function Home() {
 				await authConfig
 					.auth()
 					.signInWithEmailAndPassword(emailUser, passwordUser);
-				history.push(`/transactions/${userId}`)
+Polished				setUser("")
 			} catch (error) {
 				toast.error(
 					<ToastNotification
@@ -56,7 +56,7 @@ export function Home() {
 				);
 			}
 		},
-		[emailUser, history, passwordUser, userId],
+		[emailUser, history, passwordUser, setUser, userId],
 	);
 
 	// -------------------------------------------------

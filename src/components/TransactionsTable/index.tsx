@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Modal from "react-modal";
 import { useParams } from "react-router-dom";
 
@@ -15,6 +15,7 @@ import { Container } from "./style"
 // image
 import trashImage from "../../images/trash-2.svg"
 import editImage from "../../images/edit-2.svg"
+import { AuthContext } from "../../contexts/AuthContext";
 
 // Type
 type TransactionsParams = {
@@ -23,6 +24,7 @@ type TransactionsParams = {
 
 export function TransactionsTable() {
 	const params = useParams<TransactionsParams>()
+	const { userId } = useContext(AuthContext)
 
 	// hooks
 	const { transactions } = useTransactions(params.id)

@@ -12,6 +12,7 @@ type TransactionType = {
 }
 
 type firebaseTransactionTypes = Record<string, {
+	id: string,
 	title: string,
 	price: string,
 	category: string,
@@ -34,7 +35,7 @@ export function useTransactions(id: string) {
 				const toDateString = new Date().toDateString()
 				const dateFormted = toDateString.substring(1)
 				return {
-					id: key,
+					id: value.id,
 					title: value.title,
 					price: value.price,
 					category: value.category,
@@ -43,6 +44,7 @@ export function useTransactions(id: string) {
 				}
 			})
 			setTransactions(parsedTransaction)
+			console.log(parsedTransaction)
 		})
 
 		return () => {

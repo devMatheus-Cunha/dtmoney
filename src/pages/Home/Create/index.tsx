@@ -26,6 +26,7 @@ import { authConfig } from "../../../services/firebase";
 export function Create() {
 	const history = useHistory()
 	const { setUserId } = useContext(AuthContext)
+	const { user } = useContext(AuthContext)
 
 	// State
 	const [emailUser, setEmailUser] = useState("")
@@ -34,7 +35,7 @@ export function Create() {
 	const signUpHandler = useCallback(
 		async (event) => {
 			event.preventDefault();
-			const createTransaciton = await database.ref("transactions")
+			const createTransaciton = await database.ref(`/transactions/${user?.id}`)
 			try {
 				await authConfig
 					.auth()
@@ -43,8 +44,8 @@ export function Create() {
 					email: emailUser,
 					password: passwordUser,
 				}
-				const firebaseCreate = await createTransaciton.push(data)
-				setUserId(firebaseCreate.key)
+				await createTransaciton.update(data)
+				setUserId(user?.id)
 				history.push("/")
 			} catch (errors) {
 				await toast.error(
