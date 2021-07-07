@@ -44,7 +44,6 @@ export function useTransactions(id: string) {
 				}
 			})
 			setTransactions(parsedTransaction)
-			console.log(parsedTransaction)
 		})
 
 		return () => {

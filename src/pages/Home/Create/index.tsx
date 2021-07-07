@@ -64,7 +64,7 @@ export function Create() {
 				);
 			}
 		},
-		[emailUser, history, passwordUser, setUserId],
+		[emailUser, history, passwordUser, setUserId, user?.id],
 	);
 
 	// -------------------------------------------------

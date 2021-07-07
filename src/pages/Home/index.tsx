@@ -2,9 +2,6 @@ import {
 	useCallback, useContext, useState,
 } from "react";
 import { toast } from "react-toastify";
-import {
-	useHistory,
-} from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 // container
@@ -17,14 +14,13 @@ import alertImg from "../../images/alert-circle.svg"
 import "./style.scss";
 
 // Detabase
-import { authConfig, database } from "../../services/firebase";
+import { authConfig } from "../../services/firebase";
 
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
 export function Home() {
-	const history = useHistory()
-	const { userId, setUser, user } = useContext(AuthContext)
+	const { setUser } = useContext(AuthContext)
 
 	// State
 	const [emailUser, setEmailUser] = useState("")
@@ -38,7 +34,7 @@ export function Home() {
 				await authConfig
 					.auth()
 					.signInWithEmailAndPassword(emailUser, passwordUser);
-Polished				setUser("")
+				setUser("")
 			} catch (error) {
 				toast.error(
 					<ToastNotification
@@ -56,7 +52,7 @@ Polished				setUser("")
 				);
 			}
 		},
-		[emailUser, history, passwordUser, setUser, userId],
+		[emailUser, passwordUser, setUser],
 	);
 
 	// -------------------------------------------------
