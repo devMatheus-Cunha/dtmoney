@@ -10,15 +10,18 @@ import { AuthContext } from "../../../contexts/AuthContext";
 // container
 import { ToastNotification } from "../../../container/Toast"
 
-// Images
-import alertImg from "../../../assets/images/alert-circle.svg"
-
-// Style
-import "../style.scss";
-
 // Detabase
 import { database } from "../../../services/firebase";
 import { authConfig } from "../../../services/firebase";
+
+// images
+import logo from "../../../assets/images/logo.svg";
+import alertImg from "../../../assets/images/alert-circle.svg"
+
+/// style
+import {
+	Container, Wrapper, ContainerSideBar, LogoWrapper, Form, StyledInput, ContainerInput,
+} from "../style";
 
 // -------------------------------------------------
 // Export Function
@@ -29,23 +32,24 @@ export function Create() {
 	const { user } = useContext(AuthContext)
 
 	// State
+	const [nameUser, setNameUser] = useState("")
 	const [emailUser, setEmailUser] = useState("")
 	const [passwordUser, setPasswordUser] = useState("")
 
 	const signUpHandler = useCallback(
 		async (event) => {
 			event.preventDefault();
-			const createTransaciton = await database.ref(`/transactions/${user?.id}`)
+			const createTransaciton = await database.ref("/transactions")
 			try {
 				await authConfig
 					.auth()
 					.createUserWithEmailAndPassword(emailUser, passwordUser);
 				const data = {
+					user: nameUser,
 					email: emailUser,
 					password: passwordUser,
 				}
-				await createTransaciton.update(data)
-				setUserId(user?.id)
+				await createTransaciton.push(data)
 				history.push("/")
 			} catch (errors) {
 				await toast.error(
@@ -64,37 +68,53 @@ export function Create() {
 				);
 			}
 		},
-		[emailUser, history, passwordUser, setUserId, user?.id],
+		[emailUser, history, nameUser, passwordUser],
 	);
 
 	// -------------------------------------------------
 	// Render
 	// -------------------------------------------------
 	return (
-		<div id="page-auth">
-			<main>
-				<div className="main-content">
-					<div className="separator">Criar tabela para controle financeiro</div>
-					<form onSubmit={signUpHandler}>
-						<input
-							type="email"
-							name="email"
-							placeholder="Digite o código da sala"
-							onChange={(event) => setEmailUser(event.target.value)}
-						/>
-						<input
-							type="password"
-							name="password"
-							placeholder="Digite o código da sala"
-							onChange={(event) => setPasswordUser(event.target.value)}
-						/>
-						<button className="button" type="submit">
-							Criar
-						</button>
-						<p><a href="/">Fazer Login</a></p>
-					</form>
-				</div>
-			</main>
-		</div>
+		<>
+			<Container>
+				<Wrapper>
+					<ContainerSideBar>
+						<LogoWrapper>
+							<img src={logo} alt="" />
+						</LogoWrapper>
+						<Form onSubmit={signUpHandler}>
+							<h3>Criar Conta</h3>
+							<ContainerInput>
+								<StyledInput
+									placeholder="Digite seu nome..."
+									type="text"
+									onChange={(event) => setNameUser(event.target.value)}
+								/>
+								<StyledInput
+									placeholder="Digite seu email..."
+									type="email"
+									onChange={(event) => setEmailUser(event.target.value)}
+								/>
+
+								<StyledInput
+									placeholder="Digite sua senha..."
+									type="password"
+									onChange={(event) => setPasswordUser(event.target.value)}
+								/>
+							</ContainerInput>
+							<button type="submit">Criar</button>
+						</Form>
+						<div>
+							<h4>
+								Já possui uma conta?
+								{" "}
+								<a href="/"><span>Fazer Login</span></a>
+							</h4>
+						</div>
+					</ContainerSideBar>
+
+				</Wrapper>
+			</Container>
+		</>
 	)
 }

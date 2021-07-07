@@ -1,5 +1,5 @@
 // Image
-import ImageLogo from "../../assets/images/logo.svg"
+import ImageLogo from "../../assets/images/logoTransaction.svg"
 
 // style compoent
 import { Container, Content } from "./style"

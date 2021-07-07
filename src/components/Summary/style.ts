@@ -27,7 +27,7 @@ div{
   }
 
   &.highlight-background{
-    background-color: var(--green);
+    background-color: #33CC95;
     color:#fff;
   }
 }

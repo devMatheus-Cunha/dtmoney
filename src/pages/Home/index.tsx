@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import {
 	useCallback, useContext, useState,
 } from "react";
@@ -7,24 +8,29 @@ import { AuthContext } from "../../contexts/AuthContext";
 // container
 import { ToastNotification } from "../../container/Toast"
 
-// Images
+// images
 import alertImg from "../../assets/images/alert-circle.svg"
+import logo from "../../assets/images/logo.svg";
 
-// Style
-import "./style.scss";
+// style
+import {
+	Container, Wrapper, ContainerSideBar, LogoWrapper, Form, StyledInput, ContainerInput,
+} from "./style";
 
-// Detabase
+// detabase
 import { authConfig } from "../../services/firebase";
 
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
 export function Home() {
+	const history = useHistory()
 	const { setUser } = useContext(AuthContext)
 
 	// State
-	const [emailUser, setEmailUser] = useState("")
-	const [passwordUser, setPasswordUser] = useState("")
+	const [emailUser, setEmailUser] = useState<string>("")
+	const [passwordUser, setPasswordUser] = useState<string>("")
+	const [isLogginActive, setIsLogginActive] = useState(true)
 
 	const loginHandler = useCallback(
 		async (event) => {
@@ -34,7 +40,6 @@ export function Home() {
 				await authConfig
 					.auth()
 					.signInWithEmailAndPassword(emailUser, passwordUser);
-				setUser("")
 			} catch (error) {
 				toast.error(
 					<ToastNotification
@@ -52,37 +57,50 @@ export function Home() {
 				);
 			}
 		},
-		[emailUser, passwordUser, setUser],
+		[emailUser, passwordUser],
 	);
 
 	// -------------------------------------------------
 	// Render
 	// -------------------------------------------------
 	return (
-		<div id="page-auth">
-			<main>
-				<div className="main-content">
-					<div className="separator">Fazer Login</div>
-					<form onSubmit={loginHandler}>
-						<input
-							type="email"
-							name="email"
-							placeholder="Digite o código da sala"
-							onChange={(event) => setEmailUser(event.target.value)}
-						/>
-						<input
-							type="password"
-							name="password"
-							placeholder="Digite o código da sala"
-							onChange={(event) => setPasswordUser(event.target.value)}
-						/>
-						<button className="button" type="submit">
-							Login
-						</button>
-						<p><a href="/sign">Criar conta</a></p>
-					</form>
-				</div>
-			</main>
-		</div>
+		<>
+			<Container>
+				<Wrapper>
+					<ContainerSideBar>
+						<LogoWrapper>
+							<img src={logo} alt="" />
+						</LogoWrapper>
+						<Form onSubmit={loginHandler}>
+							<h3>Fazer Login</h3>
+							<ContainerInput>
+								<StyledInput
+									placeholder="Digite seu email..."
+									type="email"
+									required
+									onChange={(event) => setEmailUser(event.target.value)}
+								/>
+
+								<StyledInput
+									placeholder="Digite sua senha..."
+									type="password"
+									required
+									onChange={(event) => setPasswordUser(event.target.value)}
+								/>
+							</ContainerInput>
+
+							<button type="submit">Login</button>
+						</Form>
+						<div>
+							<h4>
+								Ainda não possui uma conta?
+								{" "}
+								<a href="/sign"><span>Crie Aqui</span></a>
+							</h4>
+						</div>
+					</ContainerSideBar>
+				</Wrapper>
+			</Container>
+		</>
 	)
 }
