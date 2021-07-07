@@ -5,8 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastNotification } from "../../../container/Toast";
 
 // image
-import closeImg from "../../../images/close.svg";
-import checkImg from "../../../images/check.svg";
+import closeImg from "../../../assets/images/close.svg";
+import checkImg from "../../../assets/images/check.svg";
 
 // database
 import { database } from "../../../services/firebase";

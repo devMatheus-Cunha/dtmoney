@@ -2,9 +2,9 @@
 import { Container } from "./style"
 
 // image
-import incomeImg from "../../images/income.svg"
-import outcomeImg from "../../images/outcome.svg"
-import totalImg from "../../images/total.svg"
+import incomeImg from "../../assets/images/income.svg"
+import outcomeImg from "../../assets/images/outcome.svg"
+import totalImg from "../../assets/images/total.svg"
 
 export function Summary() {
 	return (

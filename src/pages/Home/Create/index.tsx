@@ -11,7 +11,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { ToastNotification } from "../../../container/Toast"
 
 // Images
-import alertImg from "../../../images/alert-circle.svg"
+import alertImg from "../../../assets/images/alert-circle.svg"
 
 // Style
 import "../style.scss";

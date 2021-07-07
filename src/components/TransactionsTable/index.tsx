@@ -13,8 +13,8 @@ import { RenderModalDelet } from "./items/delete"
 import { Container } from "./style"
 
 // image
-import trashImage from "../../images/trash-2.svg"
-import editImage from "../../images/edit-2.svg"
+import trashImage from "../../assets/images/trash-2.svg"
+import editImage from "../../assets/images/edit-2.svg"
 
 // Type
 type TransactionsParams = {

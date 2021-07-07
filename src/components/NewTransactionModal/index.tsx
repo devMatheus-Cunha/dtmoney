@@ -7,11 +7,11 @@ import Modal from "react-modal";
 import { database } from "../../services/firebase"
 
 // image
-import closeImg from "../../images/close.svg"
-import incomeImg from "../../images/income.svg"
-import outcomeImg from "../../images/outcome.svg"
-import alertImg from "../../images/alert-circle.svg"
-import checkImg from "../../images/check.svg"
+import closeImg from "../../assets/images/close.svg"
+import incomeImg from "../../assets/images/income.svg"
+import outcomeImg from "../../assets/images/outcome.svg"
+import alertImg from "../../assets/images/alert-circle.svg"
+import checkImg from "../../assets/images/check.svg"
 
 // style
 import { Container, TransactionTypeContainer, RadioBox } from "./style"

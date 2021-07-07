@@ -6,7 +6,7 @@ import { Header } from "../../components/Header";
 import { NewTransactionModal } from "../../components/NewTransactionModal";
 import { TransactionsTable } from "../../components/TransactionsTable";
 
-import { GlobalStyle } from "../../style/global";
+import { GlobalStyle } from "../../assets/style/global";
 
 export function Transactions() {
   	// state

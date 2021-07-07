@@ -14,7 +14,7 @@ import { Transactions } from "./pages/Transactions"
 import { AuthProvider } from "./contexts/AuthContext"
 
 // style
-import { GlobalStyle } from "./style/global";
+import { GlobalStyle } from "./assets/style/global";
 
 Modal.setAppElement("#root");
 
