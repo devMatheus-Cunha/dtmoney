@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Modal from "react-modal";
-import { useParams } from "react-router-dom";
 
 // hooks
 import { useTransactions } from "../../hooks/useTransactions"
@@ -18,24 +17,22 @@ import editImage from "../../assets/images/edit-2.svg"
 
 // Type
 type TransactionsParams = {
-  id: string
+  idTransaction: string
 }
 
-export function TransactionsTable() {
-	const params = useParams<TransactionsParams>()
-
+export function TransactionsTable({
+	idTransaction,
+}:TransactionsParams) {
 	// hooks
-	const { transactions } = useTransactions(params.id)
+	const { transactions } = useTransactions(idTransaction)
 
 	// State
 	const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
 	const [deleteTransactionModalOpen, setDeleteTransactionModalOpen] = useState(false);
-	const [idTransaction, setIdTransactions] = useState("")
 
 	// open modal
-	function handleEditTransaction(id: string) {
+	function handleEditTransaction() {
 		setIsEditTransactionModalOpen(true)
-		setIdTransactions(id)
 	}
 
 	function handleClosenEditTransaction() {
@@ -43,9 +40,8 @@ export function TransactionsTable() {
 	}
 
 	// functionw
-	function handleOpenDeleteTransaction(id: string) {
+	function handleOpenDeleteTransaction() {
 		setDeleteTransactionModalOpen(true)
-		setIdTransactions(id)
 	}
 
 	function handleClosedDeleteTransaction() {
@@ -114,7 +110,7 @@ export function TransactionsTable() {
 													<td className="action">
 														<button
 															type="button"
-															onClick={() => handleOpenDeleteTransaction(value.id)}
+															onClick={() => handleOpenDeleteTransaction()}
 														>
 															<img
 																src={trashImage}
@@ -123,7 +119,7 @@ export function TransactionsTable() {
 														</button>
 														<button
 															type="button"
-															onClick={() => handleEditTransaction(value.id)}
+															onClick={() => handleEditTransaction()}
 														>
 															<img src={editImage} alt="Editar" />
 														</button>

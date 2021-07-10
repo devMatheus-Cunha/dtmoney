@@ -33,15 +33,15 @@ export function RenderModalEdit({
 	const [transactionsDatas, setTransactionsDatas] = useState<any>([]);
 
 	useEffect(() => {
-		const transacitonRef = database.ref(`transactions/${idTransaction}`)
+		const transactionRef = database.ref(`transactions/${idTransaction}/newtransaction`)
 
-		transacitonRef.on("value", (room) => {
+		transactionRef.on("value", (room) => {
 			const databaseTransactions = room.val()
 			setTransactionsDatas(databaseTransactions)
 		})
 
 		return () => {
-			transacitonRef.off("value")
+			transactionRef.off("value")
 		}
 	}, [idTransaction])
 

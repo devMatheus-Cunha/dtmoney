@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 // components
 import { Dashboard } from "../../components/Dashboard";
@@ -8,7 +9,14 @@ import { TransactionsTable } from "../../components/TransactionsTable";
 
 import { GlobalStyle } from "../../assets/style/global";
 
+// Type
+type TransactionsParams = {
+id: string
+}
+
 export function Transactions() {
+	const params = useParams<TransactionsParams>()
+
   	// state
 	const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
 
@@ -19,6 +27,7 @@ export function Transactions() {
 	function handleClosenNewTransaction() {
 		setIsNewTransactionModalOpen(false)
 	}
+
 	return (
 		<>
 			<Header onOpenNewTransaction={handleOpenNewTransaction} />
@@ -27,7 +36,9 @@ export function Transactions() {
 				isOpen={isNewTransactionModalOpen}
 				onRequestClose={handleClosenNewTransaction}
 			/>
-			<TransactionsTable />
+			<TransactionsTable
+				idTransaction={params.id}
+			/>
 			<GlobalStyle />
 		</>
 	)
