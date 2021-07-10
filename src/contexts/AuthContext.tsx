@@ -7,6 +7,7 @@ import { auth } from "../services/firebase";
 type User = {
 	id: string,
   emailUser: string | null,
+	userName: string | null
 }
 
 type AuthContextProviderProps = {
@@ -17,15 +18,16 @@ export const AuthContext = createContext<any>("");
 
 export const AuthProvider = (props: AuthContextProviderProps) => {
 	const [user, setUser] = useState<User>()
-	const [userId, setUserId] = useState<any>("")
+	const [userDataCreate, setDataCreate] = useState<any>({})
 	useEffect(() => {
 		const unsubsribe = auth.onAuthStateChanged((user) => {
 			if (user) {
-				const { email, uid } = user
+				const { email, uid, displayName } = user
 
 				setUser({
 					id: uid,
 					emailUser: email,
+					userName: displayName,
 				})
 			}
 			return () => {
@@ -35,7 +37,7 @@ export const AuthProvider = (props: AuthContextProviderProps) => {
 	}, [user])
 	return (
 		<AuthContext.Provider value={{
-			user, userId, setUserId, setUser,
+			user, userDataCreate, setDataCreate, setUser,
 		}}
 		>
 			{props.children}

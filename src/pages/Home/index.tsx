@@ -1,7 +1,8 @@
-import { useHistory } from "react-router-dom";
+/* eslint-disable max-len */
 import {
 	useCallback, useContext, useState,
 } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -12,6 +13,7 @@ import { ToastNotification } from "../../container/Toast"
 import alertImg from "../../assets/images/alert-circle.svg"
 import logo from "../../assets/images/logo.svg";
 import banner from "../../assets/images/banner.svg";
+import checkImg from "../../assets/images/check.svg"
 
 // style
 import {
@@ -26,12 +28,10 @@ import { authConfig } from "../../services/firebase";
 // -------------------------------------------------
 export function Home() {
 	const history = useHistory()
-	const { setUser } = useContext(AuthContext)
-
+	const { user } = useContext(AuthContext)
 	// State
 	const [emailUser, setEmailUser] = useState<string>("")
 	const [passwordUser, setPasswordUser] = useState<string>("")
-	const [isLogginActive, setIsLogginActive] = useState(true)
 
 	const loginHandler = useCallback(
 		async (event) => {
@@ -40,26 +40,49 @@ export function Home() {
 			try {
 				await authConfig
 					.auth()
-					.signInWithEmailAndPassword(emailUser, passwordUser);
+					.signInWithEmailAndPassword(emailUser, passwordUser)
+					.then(() => {
+						toast.success(
+							<ToastNotification
+								type={checkImg}
+								content="Login feito com sucesso!"
+							/>, {
+								position: "top-right",
+								autoClose: 3000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: true,
+								progress: undefined,
+							},
+						);
+						history.push(`/transactions/${user.id}`)
+					})
 			} catch (error) {
-				toast.error(
-					<ToastNotification
-						type={alertImg}
-						content="Dados informados estão incorretos!"
-					/>, {
-					position: "top-right",
-					autoClose: 3000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-				},
-				);
+				if (error.message === "There is no user record corresponding to this identifier. The user may have been deleted.") {
+					toast.error(
+						<ToastNotification
+							type={alertImg}
+							content="Dados informados estão incorretos!"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
+				}
 			}
 		},
-		[emailUser, passwordUser],
+		[emailUser, history, passwordUser, user?.id],
 	);
+
+	if (user) {
+		return <Redirect to={`/transactions/${user.id}`} />
+	}
 
 	// -------------------------------------------------
 	// Render

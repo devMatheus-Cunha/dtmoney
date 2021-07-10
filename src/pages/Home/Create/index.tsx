@@ -11,13 +11,13 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { ToastNotification } from "../../../container/Toast"
 
 // Detabase
-import { database } from "../../../services/firebase";
 import { authConfig } from "../../../services/firebase";
 
 // images
 import logo from "../../../assets/images/logo.svg";
 import alertImg from "../../../assets/images/alert-circle.svg"
 import banner from "../../../assets/images/banner.svg";
+import checkImg from "../../../assets/images/check.svg"
 
 /// style
 import {
@@ -29,8 +29,7 @@ import {
 // -------------------------------------------------
 export function Create() {
 	const history = useHistory()
-	const { setUserId } = useContext(AuthContext)
-	const { user } = useContext(AuthContext)
+	const { setDataCreate } = useContext(AuthContext)
 
 	// State
 	const [nameUser, setNameUser] = useState("")
@@ -40,36 +39,68 @@ export function Create() {
 	const signUpHandler = useCallback(
 		async (event) => {
 			event.preventDefault();
-			const createTransaciton = await database.ref("/transactions")
 			try {
-				await authConfig
-					.auth()
-					.createUserWithEmailAndPassword(emailUser, passwordUser);
-				const data = {
-					user: nameUser,
-					email: emailUser,
-					password: passwordUser,
+				const valuesFiledsCreateAccount = nameUser.length && emailUser.length && passwordUser.length
+				if (valuesFiledsCreateAccount > 0) {
+					await authConfig
+						.auth()
+						.createUserWithEmailAndPassword(emailUser, passwordUser)
+						.then(() => {
+							toast.success(
+								<ToastNotification
+									type={checkImg}
+									content="Conta criada com sucesso!"
+								/>, {
+									position: "top-right",
+									autoClose: 3000,
+									hideProgressBar: false,
+									closeOnClick: true,
+									pauseOnHover: true,
+									draggable: true,
+									progress: undefined,
+								},
+							);
+							setDataCreate({
+								name: nameUser,
+								email: emailUser,
+								password: passwordUser,
+							})
+							history.push("/")
+						})
+				} else {
+					toast.warn(
+						<ToastNotification
+							type={alertImg}
+							content="Preencha todos os campos"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
 				}
-				await createTransaciton.push(data)
-				history.push("/")
 			} catch (errors) {
 				await toast.error(
 					<ToastNotification
 						type={alertImg}
 						content="Já possui uma conta com estes dados"
 					/>, {
-					position: "top-right",
-					autoClose: 3000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-				},
+						position: "top-right",
+						autoClose: 3000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					},
 				);
 			}
 		},
-		[emailUser, history, nameUser, passwordUser],
+		[emailUser, history, nameUser, passwordUser, setDataCreate],
 	);
 
 	// -------------------------------------------------
@@ -113,7 +144,7 @@ export function Create() {
 							</h4>
 						</div>
 					</ContainerSideBar>
-						<img src={banner} alt="" />
+					<img src={banner} alt="" />
 
 				</Wrapper>
 			</Container>
