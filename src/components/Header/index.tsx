@@ -17,8 +17,8 @@ export function Header({
 }: HeanderProps) {
 	const history = useHistory()
 
-	 const deslogar = () => {
-		 authConfig
+	const deslogar = () => {
+		authConfig
 			.auth().signOut().then(() => {
 				history.push("/")
 			}).catch((error) => {
@@ -30,15 +30,17 @@ export function Header({
 		<Container>
 			<Content>
 				<img src={ImageLogo} alt="dt money" />
-				<button type="button" onClick={onOpenNewTransaction}>
-					Nova Transação
-				</button>
-				<button
-					type="button"
-					onClick={deslogar}
-				>
-					Sair
-				</button>
+				<div>
+					<button type="button" onClick={onOpenNewTransaction}>
+						Nova Transação
+					</button>
+					<button
+						type="button"
+						onClick={deslogar}
+					>
+						Sair
+					</button>
+				</div>
 			</Content>
 		</Container>
 	)

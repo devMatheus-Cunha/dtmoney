@@ -13,6 +13,11 @@ display: flex;
 align-items:center;
 justify-content: space-between;
 
+div{
+  display: flex;
+  gap: 1rem;
+}
+
 button{
   font-size:1rem;
   color: #fff;
@@ -21,11 +26,11 @@ button{
   padding:0 2rem;
   border-radius: 0.25rem;
   height:3rem;
-
-  transition: filter ;
-
+  
+  transition:  background-color 0.1s ;
+  
   &:hover{
-    filter:brightness(0.9);
+    background-color:#28A478;
   }
 }
 `
