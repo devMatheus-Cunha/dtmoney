@@ -1,11 +1,11 @@
+/* eslint-disable consistent-return */
 // Image
 import { FormEvent } from "react";
 import { useHistory } from "react-router-dom";
-import ImageLogo from "../../assets/images/logoTransaction.svg"
-import { authConfig } from "../../services/firebase"
-
+import ImageLogo from "../../assets/images/logoTransaction.svg";
+import { authConfig } from "../../services/firebase";
 // style compoent
-import { Container, Content } from "./style"
+import { Container, Content } from "./style";
 
 // type
 type HeanderProps = {
@@ -17,12 +17,11 @@ export function Header({
 }: HeanderProps) {
 	const history = useHistory()
 
-	const deslogar = () => {
+	const deslogar = (event: FormEvent) => {
+		event.preventDefault()
 		authConfig
 			.auth().signOut().then(() => {
-				history.push("/")
-			}).catch((error) => {
-				console.log(error)
+				history.push("/sign")
 			});
 	}
 
