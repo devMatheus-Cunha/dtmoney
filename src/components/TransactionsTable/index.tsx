@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Modal from "react-modal";
+import ReactTooltip from "react-tooltip";
 
 // hooks
 import { useTransactions } from "../../hooks/useTransactions"
@@ -111,6 +112,9 @@ export function TransactionsTable({
 														<button
 															type="button"
 															onClick={() => handleOpenDeleteTransaction()}
+															data-tip="Deletar"
+															data-delay-hide="100"
+															data-type="error"
 														>
 															<img
 																src={trashImage}
@@ -120,11 +124,19 @@ export function TransactionsTable({
 														<button
 															type="button"
 															onClick={() => handleEditTransaction()}
+															data-tip="Editar"
+															data-delay-hide="100"
+															data-type="warning"
 														>
 															<img src={editImage} alt="Editar" />
 														</button>
+
 													</td>
 												</>
+												<ReactTooltip
+													effect="solid"
+													className="TooltipStyle"
+												/>
 											</tr>
 										)
 									})
