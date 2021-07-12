@@ -83,7 +83,7 @@ export function TransactionsTable({
 				transactions.length > 0 ? (
 					<table>
 						<thead>
-							<tr>
+							<tr key={idTransaction}>
 								<th>Título</th>
 								<th>Valor</th>
 								<th>Categoria</th>

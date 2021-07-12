@@ -1,11 +1,13 @@
-import { useState, FormEvent, useContext } from "react";
+import { useState, FormEvent } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
-import { AuthContext } from "../../contexts/AuthContext";
 
 // database
 import { database } from "../../services/firebase"
+
+// container
+import { ToastNotification } from "../../container/Toast"
 
 // image
 import closeImg from "../../assets/images/close.svg"
@@ -17,9 +19,6 @@ import checkImg from "../../assets/images/check.svg"
 // style
 import { Container, TransactionTypeContainer, RadioBox } from "./style"
 import "react-toastify/dist/ReactToastify.css";
-
-// container
-import { ToastNotification } from "../../container/Toast"
 
 // interface
 interface NewTransactionModalProps {
@@ -39,7 +38,6 @@ export function NewTransactionModal({
 	isOpen, onRequestClose,
 }: NewTransactionModalProps) {
 	const params = useParams<TransactionsParams>()
-	const { userDataCreate } = useContext(AuthContext)
 
 	// state
 	const [title, setTitle] = useState("")
@@ -56,8 +54,6 @@ export function NewTransactionModal({
 			price,
 			category,
 			type,
-			name: userDataCreate.name,
-			email: userDataCreate.email,
 		}
 
 		const valuesTransactions = data.title.length && data.price.length && data.category.length && data.type.length
