@@ -9,6 +9,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 // container
 import { ToastNotification } from "../../container/Toast"
 
+// detabase
+import { authConfig } from "../../services/firebase";
+
 // images
 import alertImg from "../../assets/images/alert-circle.svg"
 import logo from "../../assets/images/logo.svg";
@@ -19,9 +22,6 @@ import checkImg from "../../assets/images/check.svg"
 import {
 	Container, Wrapper, ContainerSideBar, LogoWrapper, Form, StyledInput, ContainerInput,
 } from "./style";
-
-// detabase
-import { authConfig } from "../../services/firebase";
 
 // -------------------------------------------------
 // Export Function

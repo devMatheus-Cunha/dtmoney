@@ -40,6 +40,10 @@ export function RenderModalDelet({
 		});
 		await database.ref(`transactions/${idTransaction}/`).remove()
 	}
+
+	// -------------------------------------------------
+	// Render
+	// -------------------------------------------------
 	return (
 		<>
 			<button

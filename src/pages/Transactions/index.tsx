@@ -14,6 +14,9 @@ type TransactionsParams = {
 id: string
 }
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export function Transactions() {
 	const params = useParams<TransactionsParams>()
 
@@ -28,6 +31,9 @@ export function Transactions() {
 		setIsNewTransactionModalOpen(false)
 	}
 
+	// -------------------------------------------------
+	// Render
+	// -------------------------------------------------
 	return (
 		<>
 			<Header onOpenNewTransaction={handleOpenNewTransaction} />

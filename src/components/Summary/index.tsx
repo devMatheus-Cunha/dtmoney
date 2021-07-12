@@ -6,7 +6,13 @@ import incomeImg from "../../assets/images/income.svg"
 import outcomeImg from "../../assets/images/outcome.svg"
 import totalImg from "../../assets/images/total.svg"
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export function Summary() {
+	// -------------------------------------------------
+	// Render
+	// -------------------------------------------------
 	return (
 		<Container>
 			<div>

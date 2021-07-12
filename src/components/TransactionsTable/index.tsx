@@ -21,6 +21,9 @@ type TransactionsParams = {
   idTransaction: string
 }
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export function TransactionsTable({
 	idTransaction,
 }:TransactionsParams) {
@@ -49,6 +52,9 @@ export function TransactionsTable({
 		setDeleteTransactionModalOpen(false)
 	}
 
+	// -------------------------------------------------
+	// Render
+	// -------------------------------------------------
 	return (
 		<Container>
 			<Modal

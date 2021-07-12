@@ -16,12 +16,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 // container
 import { ToastNotification } from "../../../container/Toast"
+
 // interface
 interface NewTransactionModalProps {
 	onRequestClose: () => void;
 	idTransaction: string;
 }
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export function RenderModalEdit({
 	onRequestClose, idTransaction,
 }: NewTransactionModalProps) {
@@ -71,6 +75,9 @@ export function RenderModalEdit({
 		await onRequestClose()
 	}
 
+	// -------------------------------------------------
+	// Render
+	// -------------------------------------------------
 	return (
 		<>
 			<button

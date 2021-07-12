@@ -12,6 +12,9 @@ type HeanderProps = {
 	onOpenNewTransaction: () => void;
 }
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export function Header({
 	onOpenNewTransaction,
 }: HeanderProps) {
@@ -25,6 +28,9 @@ export function Header({
 			});
 	}
 
+	// -------------------------------------------------
+	// Render
+	// -------------------------------------------------
 	return (
 		<Container>
 			<Content>

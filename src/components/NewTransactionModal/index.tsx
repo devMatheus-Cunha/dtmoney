@@ -27,11 +27,14 @@ interface NewTransactionModalProps {
 	onRequestClose: () => void;
 }
 
-// Type
+// type
 type TransactionsParams = {
 	id: string
 }
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export function NewTransactionModal({
 	isOpen, onRequestClose,
 }: NewTransactionModalProps) {
@@ -99,6 +102,9 @@ export function NewTransactionModal({
 		setType("")
 	}
 
+	// -------------------------------------------------
+	// Render
+	// -------------------------------------------------
 	return (
 		<Modal
 			isOpen={isOpen}
