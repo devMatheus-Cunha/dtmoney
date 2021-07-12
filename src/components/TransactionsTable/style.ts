@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-margin: 4rem;
+margin: 3rem 4rem;
 
 table{
   width:100%;
@@ -24,34 +24,34 @@ table{
     background-color:var(--shape);
     color: var(--text-body);
     border-radius: 0.2rem;
-
+    
     &:first-child{
       color: var(--text-title)
     }
-
+    
     &.deposit{
       color: var(--green)
     }
-
+    
     &.withdraw{
       color: var(--red)
     }
-
+    
     
   }
-
+  
   .action{
     display:flex;
     gap: 0.3rem;
     button{
       background: transparent;
       border: none;
-
+      
       &:hover{
         filter:brightness(0.9);
       }
     }
-   
+    
   }
 }
 `
@@ -61,45 +61,78 @@ export const ContainerDeleteTrasaction = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
-
-h2{
-  font-size:2rem
-}
-
-button{
+  
+  h2{
+    font-size:2rem
+  }
+  
+  button{
     height:3rem;
     border: 1px solid #d7d7d7;
     border-radius:0.25rem;
     margin: 1rem auto auto auto;
-
+    
     width: 85%;
-
+    
     transition: border-color 0.2s;
-
+    
     span{
       display: inline-block;
       font-size:1rem;
     }
- }
-
- .delete{
-      color: white;
-      background-color:var(--red);
-      transition: filter 0.2s;
+  }
+  
+  .delete{
+    color: white;
+    background-color:var(--red);
+    transition: filter 0.2s;
     
-      &:hover{
-       filter: brightness(0.9)
-      }
-
+    &:hover{
+      filter: brightness(0.9)
     }
- .cancel{
-      color: white;
-      background-color: var(--text-body);
-      transition: filter 0.2s;
-
+    
+  }
+  .cancel{
+    color: white;
+    background-color: var(--text-body);
+    transition: filter 0.2s;
+    
+    &:hover{
+      filter: brightness(0.9)
+    }
+  }
+  
+  `
+export const ContainerInformation = styled.div`
+  display: flex;
+  align-items:center;
+  justify-content:space-between;
+  
+  div{
+    display: flex;
+    gap: 0.5rem;
+    
+    & > button{
+      background-color:transparent;
+      border: none;
+      text-decoration: underline;
+      color: var(--text-body);
+      padding-right: 0.6rem;
       &:hover{
-       filter: brightness(0.9)
+        filter: brightness(0.9)
       }
     }
+    
+    > h3{
+      font-weight: 500;
+      color:#969CB2;
+    }
+  }
+  
+ > h3{
+    font-weight: 500;
+    color:#363F5F;
+    font-size: 1.4rem;
+  }
 
 `
