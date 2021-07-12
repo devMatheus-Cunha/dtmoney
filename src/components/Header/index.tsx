@@ -20,7 +20,7 @@ export function Header({
 }: HeanderProps) {
 	const history = useHistory()
 
-	const deslogar = (event: FormEvent) => {
+	const signOut = (event: FormEvent) => {
 		event.preventDefault()
 		authConfig
 			.auth().signOut().then(() => {
@@ -41,7 +41,7 @@ export function Header({
 					</button>
 					<button
 						type="button"
-						onClick={deslogar}
+						onClick={signOut}
 					>
 						Sair
 					</button>
