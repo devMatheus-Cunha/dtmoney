@@ -43,7 +43,7 @@ export function Transactions() {
 				onRequestClose={handleClosenNewTransaction}
 			/>
 			<TransactionsTable
-				idTransaction={params.id}
+				idTransactionRoute={params.id}
 			/>
 			<GlobalStyle />
 		</>

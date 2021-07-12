@@ -31,11 +31,11 @@ export function useTransactions(id: string) {
 			const databasetransactions = room.val()
 			const firebaseTransaction: firebaseTransactionTypes = databasetransactions ?? {}
 
-			const parsedTransaction = Object.entries(firebaseTransaction).map(([, value]) => {
+			const parsedTransaction = Object.entries(firebaseTransaction).map(([key, value]) => {
 				const toDateString = new Date().toDateString()
 				const dateFormted = toDateString.substring(1)
 				return {
-					id: value.id,
+					id: key,
 					title: value.title,
 					price: value.price,
 					category: value.category,

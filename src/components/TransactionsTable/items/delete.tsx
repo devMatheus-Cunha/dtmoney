@@ -17,11 +17,12 @@ import { ContainerDeleteTrasaction } from "../style";
 // interface
 interface NewTransactionModalProps {
   onRequestClose: () => void;
-  idTransaction: string;
+  idTransactionRoute: string;
+	idTransaction: string
 }
 
 export function RenderModalDelet({
-	onRequestClose, idTransaction,
+	onRequestClose, idTransactionRoute, idTransaction,
 }: NewTransactionModalProps) {
 	// functions
 	async function handleDeleteTransaction() {
@@ -38,7 +39,7 @@ export function RenderModalDelet({
 			draggable: true,
 			progress: undefined,
 		});
-		await database.ref(`transactions/${idTransaction}/newtransaction/-MeNFb2aD3Pdw7BC9tqH`).remove()
+		await database.ref(`transactions/${idTransactionRoute}/newtransaction/${idTransaction}`).remove()
 	}
 
 	// -------------------------------------------------

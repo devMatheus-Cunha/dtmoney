@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import Modal from "react-modal";
 import ReactTooltip from "react-tooltip";
+import { useContext } from "react";
 
 // hooks
 import { useTransactions } from "../../hooks/useTransactions"
@@ -18,34 +19,37 @@ import editImage from "../../assets/images/edit-2.svg"
 
 // Type
 type TransactionsParams = {
-  idTransaction: string
+  idTransactionRoute: string
 }
 
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
 export function TransactionsTable({
-	idTransaction,
+	idTransactionRoute,
 }:TransactionsParams) {
 	// hooks
-	const { transactions } = useTransactions(idTransaction)
+	const { transactions } = useTransactions(idTransactionRoute)
 
 	// State
 	const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
 	const [deleteTransactionModalOpen, setDeleteTransactionModalOpen] = useState(false);
+	const [idTransaction, setIdTransaction] = useState("");
 
 	// open modal
-	function handleEditTransaction() {
+	function handleOpenEditTransaction(id: string) {
 		setIsEditTransactionModalOpen(true)
+		setIdTransaction(id)
 	}
 
-	function handleClosenEditTransaction() {
-		setIsEditTransactionModalOpen(false)
+	function handleOpenDeleteTransaction(id: string) {
+		setDeleteTransactionModalOpen(true)
+		setIdTransaction(id)
 	}
 
 	// functionw
-	function handleOpenDeleteTransaction() {
-		setDeleteTransactionModalOpen(true)
+	function handleClosenEditTransaction() {
+		setIsEditTransactionModalOpen(false)
 	}
 
 	function handleClosedDeleteTransaction() {
@@ -76,6 +80,7 @@ export function TransactionsTable({
 			>
 				<RenderModalDelet
 					onRequestClose={handleClosedDeleteTransaction}
+					idTransactionRoute={idTransactionRoute}
 					idTransaction={idTransaction}
 				/>
 			</Modal>
@@ -83,7 +88,7 @@ export function TransactionsTable({
 				transactions.length > 0 ? (
 					<table>
 						<thead>
-							<tr key={idTransaction}>
+							<tr key={idTransactionRoute}>
 								<th>Título</th>
 								<th>Valor</th>
 								<th>Categoria</th>
@@ -91,7 +96,6 @@ export function TransactionsTable({
 								<th>Ação</th>
 							</tr>
 						</thead>
-
 						<tbody>
 							<>
 								{
@@ -117,7 +121,7 @@ export function TransactionsTable({
 													<td className="action">
 														<button
 															type="button"
-															onClick={() => handleOpenDeleteTransaction()}
+															onClick={() => handleOpenDeleteTransaction(value.id)}
 															data-tip="Deletar"
 															data-delay-hide="100"
 															data-type="error"
@@ -129,7 +133,7 @@ export function TransactionsTable({
 														</button>
 														<button
 															type="button"
-															onClick={() => handleEditTransaction()}
+															onClick={() => handleOpenEditTransaction(value.id)}
 															data-tip="Editar"
 															data-delay-hide="100"
 															data-type="warning"
