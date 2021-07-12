@@ -1,6 +1,7 @@
+/* eslint-disable max-len */
 import { useState } from "react";
 import Modal from "react-modal";
-import ReactTooltip from "react-tooltip";
+import { Tooltip } from "@material-ui/core";
 import editImage from "../../assets/images/edit-2.svg";
 
 // image
@@ -157,34 +158,37 @@ export function TransactionsTable({
 															)}
 														</td>
 														<td className="action">
-															<button
-																type="button"
-																onClick={() => handleOpenDeleteTransaction(value.id)}
-																data-tip="Deletar"
-																data-delay-hide="100"
-																data-type="error"
+															<Tooltip
+																title="Deletar"
+																placement="top"
+																arrow
 															>
-																<img
-																	src={trashImage}
-																	alt="Lixeira"
-																/>
-															</button>
-															<button
-																type="button"
-																onClick={() => handleOpenEditTransaction(value.id)}
-																data-tip="Editar"
-																data-delay-hide="100"
-																data-type="warning"
+																<button
+																	type="button"
+																	onClick={() => handleOpenDeleteTransaction(value.id)}
+																>
+																	<img
+																		src={trashImage}
+																		alt="Lixeira"
+																	/>
+																</button>
+															</Tooltip>
+
+															<Tooltip
+																title="Editar"
+																placement="top"
+																arrow
 															>
-																<img src={editImage} alt="Editar" />
-															</button>
+																<button
+																	type="button"
+																	onClick={() => handleOpenEditTransaction(value.id)}
+																>
+																	<img src={editImage} alt="Editar" />
+																</button>
+															</Tooltip>
 
 														</td>
 													</>
-													<ReactTooltip
-														effect="solid"
-														className="TooltipStyle"
-													/>
 												</tr>
 											)
 										})
