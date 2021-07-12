@@ -20,14 +20,15 @@ import { ToastNotification } from "../../../container/Toast"
 // interface
 interface NewTransactionModalProps {
 	onRequestClose: () => void;
-	idTransaction: string;
+	idTransactionRoute: string;
+	idTransaction: string
 }
 
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
 export function RenderModalEdit({
-	onRequestClose, idTransaction,
+	onRequestClose, idTransactionRoute, idTransaction,
 }: NewTransactionModalProps) {
 	// state
 	const [title, setTitle] = useState("")
@@ -37,7 +38,7 @@ export function RenderModalEdit({
 	const [transactionsDatas, setTransactionsDatas] = useState<any>([]);
 
 	useEffect(() => {
-		const transactionRef = database.ref(`transactions/${idTransaction}/newtransaction/-MeNFcoseq49PuHIkWal`)
+		const transactionRef = database.ref(`transactions/${idTransactionRoute}/newtransaction/${idTransaction}`)
 
 		transactionRef.on("value", (room) => {
 			const databaseTransactions = room.val()
@@ -47,13 +48,13 @@ export function RenderModalEdit({
 		return () => {
 			transactionRef.off("value")
 		}
-	}, [idTransaction])
+	}, [idTransaction, idTransactionRoute])
 
 	// Fucntions
 	async function handleEditTransaciton(event: FormEvent) {
 		event.preventDefault()
 
-		await database.ref(`transactions/${idTransaction}/newtransaction/-MeNFcoseq49PuHIkWal`).update({
+		await database.ref(`transactions/${idTransactionRoute}/newtransaction/${idTransaction}`).update({
 			title: title || transactionsDatas.title,
 			price: price || transactionsDatas.price,
 			category: category || transactionsDatas.category,

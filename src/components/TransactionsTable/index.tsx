@@ -1,7 +1,6 @@
-import { FormEvent, useEffect, useState } from "react"
+import { useState } from "react"
 import Modal from "react-modal";
 import ReactTooltip from "react-tooltip";
-import { useContext } from "react";
 
 // hooks
 import { useTransactions } from "../../hooks/useTransactions"
@@ -69,6 +68,7 @@ export function TransactionsTable({
 			>
 				<RenderModalEdit
 					onRequestClose={handleClosenEditTransaction}
+					idTransactionRoute={idTransactionRoute}
 					idTransaction={idTransaction}
 				/>
 			</Modal>
