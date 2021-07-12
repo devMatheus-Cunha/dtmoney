@@ -46,8 +46,8 @@ export const Form = styled.form`
 
   button {
     width: 75%;
-    max-width: 350px;
-    min-width: 250px;
+    max-width: 200px;
+    min-width: 100px;
     height: 40px;
     border: none;
     margin: 1rem auto;
@@ -104,7 +104,8 @@ export const StyledInput = styled.input`
   max-width: 350px;
   min-width: 250px;
   height: 40px;
-  border: none;
+  border: transparent;
+  outline: none;
   margin: 0.5rem 0;
   background-color: #f5f5f5;
   box-shadow: 0px 14px 9px -15px rgba(0, 0, 0, 0.25);

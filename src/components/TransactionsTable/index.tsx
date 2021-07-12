@@ -195,7 +195,7 @@ export function TransactionsTable({
 					</>
 				) : (
 					<>
-						<h3>Nenhuma transação foi adicionada até o momento</h3>
+						<h3>Nenhuma transação foi adicionada até o momento.</h3>
 
 					</>
 				)
