@@ -11,6 +11,7 @@ import { Home } from "./pages/Home"
 import { Create } from "./pages/Home/Create";
 import { Transactions } from "./pages/Transactions"
 
+// contexts
 import { AuthProvider } from "./contexts/AuthContext"
 
 // style
@@ -30,7 +31,6 @@ export function App() {
 						<Route path="/sign" component={Create} />
 						<Route path="/transactions/:id" component={Transactions} />
 						<GlobalStyle />
-
 					</Switch>
 
 				</AuthProvider>

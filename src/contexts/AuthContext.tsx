@@ -14,6 +14,9 @@ type AuthContextProviderProps = {
   children: ReactNode
 }
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export const AuthContext = createContext<any>("");
 
 export const AuthProvider = (props: AuthContextProviderProps) => {
@@ -35,6 +38,10 @@ export const AuthProvider = (props: AuthContextProviderProps) => {
 			}
 		})
 	}, [user])
+
+	// -------------------------------------------------
+	// Render
+	// -------------------------------------------------
 	return (
 		<AuthContext.Provider value={{
 			user, userDataCreate, setDataCreate, setUser,
