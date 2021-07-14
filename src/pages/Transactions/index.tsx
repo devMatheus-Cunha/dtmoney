@@ -41,7 +41,9 @@ export function Transactions() {
 		<>
 			<TransactionsContext.Provider value={[]}>
 				<Header onOpenNewTransaction={handleOpenNewTransaction} />
-				<Dashboard />
+				<Dashboard
+					idTransactionRoute={params.id}
+				/>
 				<NewTransactionModal
 					isOpen={isNewTransactionModalOpen}
 					onRequestClose={handleClosenNewTransaction}

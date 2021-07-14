@@ -1,7 +1,4 @@
-import React, { useContext } from "react"
-
-// context
-import { TransactionsContext } from "../../contexts/TransactionsContext"
+import React from "react"
 
 // style compoent
 import { Container } from "./style"
@@ -11,11 +8,21 @@ import incomeImg from "../../assets/images/income.svg"
 import outcomeImg from "../../assets/images/outcome.svg"
 import totalImg from "../../assets/images/total.svg"
 
+import { useTransactions } from "../../hooks/useTransactions"
+
+// Type
+type TransactionsParams = {
+	idTransactionRoute: string
+	}
+
 // -------------------------------------------------
 // Export Function
 // -------------------------------------------------
-export function Summary() {
-	const data = useContext(TransactionsContext)
+export function Summary({
+	idTransactionRoute,
+}: TransactionsParams) {
+	const { transactions } = useTransactions(idTransactionRoute)
+
 	// -------------------------------------------------
 	// Render
 	// -------------------------------------------------

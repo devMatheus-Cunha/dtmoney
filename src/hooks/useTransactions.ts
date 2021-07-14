@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+
+// firebase
 import { database } from "../services/firebase"
 
 // Type
