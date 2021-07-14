@@ -14,7 +14,6 @@ type TransactionType = {
 }
 
 type firebaseTransactionTypes = Record<string, {
-	id: string,
 	title: string,
 	price: string,
 	category: string,

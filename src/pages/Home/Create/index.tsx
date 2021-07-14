@@ -1,11 +1,10 @@
 import {
-	useCallback, useContext, useState,
+	useCallback, useState,
 } from "react";
 import { toast } from "react-toastify";
 import {
 	useHistory,
 } from "react-router-dom";
-import { AuthContext } from "../../../contexts/AuthContext";
 
 // container
 import { ToastNotification } from "../../../container/Toast"
@@ -29,7 +28,6 @@ import {
 // -------------------------------------------------
 export function Create() {
 	const history = useHistory()
-	const { setDataCreate } = useContext(AuthContext)
 
 	// State
 	const [nameUser, setNameUser] = useState("")
@@ -60,11 +58,6 @@ export function Create() {
 									progress: undefined,
 								},
 							);
-							setDataCreate({
-								name: nameUser,
-								email: emailUser,
-								password: passwordUser,
-							})
 							history.push("/")
 						})
 				} else {
@@ -100,7 +93,7 @@ export function Create() {
 				);
 			}
 		},
-		[emailUser, history, nameUser, passwordUser, setDataCreate],
+		[emailUser, history, nameUser, passwordUser],
 	);
 
 	// -------------------------------------------------
