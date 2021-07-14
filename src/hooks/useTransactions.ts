@@ -7,7 +7,7 @@ import { database } from "../services/firebase"
 type TransactionType = {
 	id: string,
 	title: string,
-	price: string,
+	price: number,
 	category: string,
 	type: string,
 	createdAt: string,
@@ -35,10 +35,11 @@ export function useTransactions(id: string) {
 			const parsedTransaction = Object.entries(firebaseTransaction).map(([key, value]) => {
 				const toDateString = new Date().toDateString()
 				const dateFormted = toDateString.substring(1)
+				const valuePriceNumber = parseInt(value.price, 10)
 				return {
 					id: key,
 					title: value.title,
-					price: value.price,
+					price: valuePriceNumber,
 					category: value.category,
 					type: value.type,
 					createdAt: dateFormted,
