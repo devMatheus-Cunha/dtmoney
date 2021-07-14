@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
+// contexts
+import { TransactionsContext } from "../../contexts/TransactionsContext"
+
 // components
 import { Dashboard } from "../../components/Dashboard";
 import { Header } from "../../components/Header";
@@ -36,16 +39,18 @@ export function Transactions() {
 	// -------------------------------------------------
 	return (
 		<>
-			<Header onOpenNewTransaction={handleOpenNewTransaction} />
-			<Dashboard />
-			<NewTransactionModal
-				isOpen={isNewTransactionModalOpen}
-				onRequestClose={handleClosenNewTransaction}
-			/>
-			<TransactionsTable
-				idTransactionRoute={params.id}
-			/>
-			<GlobalStyle />
+			<TransactionsContext.Provider value={[]}>
+				<Header onOpenNewTransaction={handleOpenNewTransaction} />
+				<Dashboard />
+				<NewTransactionModal
+					isOpen={isNewTransactionModalOpen}
+					onRequestClose={handleClosenNewTransaction}
+				/>
+				<TransactionsTable
+					idTransactionRoute={params.id}
+				/>
+				<GlobalStyle />
+			</TransactionsContext.Provider>
 		</>
 	)
 }
