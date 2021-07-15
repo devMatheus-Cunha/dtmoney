@@ -11,6 +11,7 @@ Project developed with the following technologies:
 - Firebase (using Email/Password authentication and Realtime Database to store data and consume it)
 - React Modal (library that renders its child content over a backdrop component and provides many features related to the interaction of these two)
 - Polished (library that has optimized styling functions for use in JavaScript, such as darken and transparentize)
+- ESlint (Using it to analyze the code and point out any problems it finds and also keep the structure of the code standardized.)
 
 ## 💻 Projeto
 
