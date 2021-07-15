@@ -18,6 +18,7 @@ type firebaseTransactionTypes = Record<string, {
 	price: string,
 	category: string,
 	type: string,
+	createdAt: string
 }>
 
 // -------------------------------------------------
@@ -33,8 +34,6 @@ export function useTransactions(id: string) {
 			const firebaseTransaction: firebaseTransactionTypes = databasetransactions ?? {}
 
 			const parsedTransaction = Object.entries(firebaseTransaction).map(([key, value]) => {
-				const toDateString = new Date().toDateString()
-				const dateFormted = toDateString.substring(1)
 				const valuePriceNumber = parseInt(value.price, 10)
 				return {
 					id: key,
@@ -42,7 +41,7 @@ export function useTransactions(id: string) {
 					price: valuePriceNumber,
 					category: value.category,
 					type: value.type,
-					createdAt: dateFormted,
+					createdAt: value.createdAt,
 				}
 			})
 			setTransactions(parsedTransaction)

@@ -54,6 +54,7 @@ export function NewTransactionModal({
 			price,
 			category,
 			type,
+			createdAt: new Date().toDateString(),
 		}
 
 		const valuesTransactions = data.title.length && data.price.length && data.category.length && data.type.length
