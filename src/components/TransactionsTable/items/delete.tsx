@@ -21,6 +21,9 @@ interface NewTransactionModalProps {
 	idTransaction: string
 }
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export function RenderModalDelet({
 	onRequestClose, idTransactionRoute, idTransaction,
 }: NewTransactionModalProps) {

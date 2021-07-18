@@ -50,7 +50,7 @@ export function RenderModalEdit({
 		}
 	}, [idTransaction, idTransactionRoute])
 
-	// Fucntions
+	// Functions
 	async function handleEditTransaciton(event: FormEvent) {
 		event.preventDefault()
 

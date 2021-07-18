@@ -22,7 +22,6 @@ export function Summary({
 	idTransactionRoute,
 }: TransactionsParams) {
 	const { transactions } = useTransactions(idTransactionRoute)
-
 	const summary = transactions.reduce((acc, transaction) => {
 		if (transaction.type === "deposit") {
 			acc.deposits += transaction.price;

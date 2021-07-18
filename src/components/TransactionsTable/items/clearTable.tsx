@@ -20,6 +20,9 @@ interface NewTransactionModalProps {
   idTransactionRoute: string;
 }
 
+// -------------------------------------------------
+// Export Function
+// -------------------------------------------------
 export function RenderModalClearTable({
 	onRequestClose, idTransactionRoute,
 }: NewTransactionModalProps) {
