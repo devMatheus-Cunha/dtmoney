@@ -37,6 +37,7 @@ export function Create() {
 	const signUpHandler = useCallback(
 		async (event) => {
 			event.preventDefault();
+			debugger
 			try {
 				const valuesFiledsCreateAccount = nameUser.length && emailUser.length && passwordUser.length
 				if (valuesFiledsCreateAccount > 0) {
@@ -76,21 +77,38 @@ export function Create() {
 						},
 					);
 				}
-			} catch (errors) {
-				await toast.error(
-					<ToastNotification
-						type={alertImg}
-						content="Já possui uma conta com estes dados"
-					/>, {
-						position: "top-right",
-						autoClose: 3000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-					},
-				);
+			} catch (error) {
+				if (error.message === "Password should be at least 6 characters") {
+					await toast.error(
+						<ToastNotification
+							type={alertImg}
+							content="A senha deve ter pelo menos 6 caracteres"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
+				} else {
+					await toast.error(
+						<ToastNotification
+							type={alertImg}
+							content="Já possui uma conta com estes dados!"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
+				}
 			}
 		},
 		[emailUser, history, nameUser, passwordUser],
