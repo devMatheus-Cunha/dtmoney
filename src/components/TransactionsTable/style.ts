@@ -73,8 +73,6 @@ table{
         margin-top: 1rem;
         padding: 1rem 0;
 
- 
-
         .contentTransactions{
           width: 100%;
           background:var(--shape);
