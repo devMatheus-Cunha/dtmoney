@@ -32,6 +32,17 @@ export const LogoWrapper = styled.div`
   img {
     height: 4.5rem;
   }
+
+  @media (max-width: 500px) {
+    img {
+    height: 3rem;
+    }
+  }
+  @media (max-width: 325px) {
+    img {
+    height: 2.5rem;
+    }
+  }
 `;
 
 export const Form = styled.form`
@@ -80,6 +91,13 @@ export const ContainerSideBar = styled.div`
     width: 100vw;
     position: absolute;
     padding: 0;
+  }
+
+  @media (max-width: 500px) {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   h4 {
