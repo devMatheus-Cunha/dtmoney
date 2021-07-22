@@ -33,4 +33,18 @@ button{
     background-color:#28A478;
   }
 }
+@media screen and (max-width:525px){
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  padding: 2rem 1rem 8rem;
+  div{
+    margin-top: 1rem;
+  }
+  button{
+  padding:0 2rem;
+  border-radius: 0.25rem;
+  height:3rem;
+}
+}
 `
