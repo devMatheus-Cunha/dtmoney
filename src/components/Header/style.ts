@@ -4,7 +4,7 @@ export const Container = styled.header`
 background: #2db584;
 `;
 
-export const Content = styled.div` 
+export const Content = styled.div`
 max-width:1220px;
 margin: 0 auto;
 
@@ -32,24 +32,5 @@ button{
   &:hover{
     background-color:#28A478;
   }
-}
-
-@media screen and (max-width:525px){
-  flex-direction: column;
-  align-items:center;
-  justify-content: center;
-
-  padding: 2rem 1rem 8rem;
-
-  div{
-    margin-top: 1rem;
-  }
-
-  button{
-  padding:0 2rem;
-  border-radius: 0.25rem;
-  height:3rem;
-}
-
 }
 `
