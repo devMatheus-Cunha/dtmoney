@@ -31,4 +31,9 @@ div{
     color:#fff;
   }
 }
+
+@media screen and (max-width:525px){
+  display:flex ;
+  flex-direction:column;
+}
 `
