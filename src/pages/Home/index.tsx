@@ -59,11 +59,27 @@ export function Home() {
 						history.push(`/transactions/${user.id}`)
 					})
 			} catch (error) {
-				if (error.message === "There is no user record corresponding to this identifier. The user may have been deleted.") {
+				if (error.message === ("There is no user record corresponding to this identifier. The user may have been deleted.")) {
 					toast.error(
 						<ToastNotification
 							type={alertImg}
 							content="Dados informados estão incorretos!"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
+				}
+				if (error.message === "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.") {
+					toast.error(
+						<ToastNotification
+							type={alertImg}
+							content="Senha informada esta incorreta!"
 						/>, {
 							position: "top-right",
 							autoClose: 3000,
