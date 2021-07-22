@@ -140,8 +140,8 @@ export function TransactionsTable({
 									{
 										transactions.map((value) => {
 											return (
-												<tr key={value.id}>
-													<>
+												<>
+													<tr key={value.id}>
 														<td>{value.title}</td>
 														<td className={value.type}>
 															{
@@ -188,14 +188,69 @@ export function TransactionsTable({
 															</Tooltip>
 
 														</td>
-													</>
-												</tr>
+													</tr>
+												</>
 											)
 										})
 									}
 								</>
 							</tbody>
 						</table>
+						<div className="styleScreen">
+							{transactions.map((value) => {
+								return (
+									<div key={value.id} className="contentTransactions">
+										<div className="styleTitle">{value.title}</div>
+										<div className="action">
+											<Tooltip
+												title="Deletar"
+												placement="top"
+												arrow
+											>
+												<button
+													type="button"
+													onClick={() => handleOpenDeleteTransaction(value.id)}
+												>
+													<img
+														src={trashImage}
+														alt="Lixeira"
+													/>
+												</button>
+											</Tooltip>
+
+											<Tooltip
+												title="Editar"
+												placement="top"
+												arrow
+											>
+												<button
+													type="button"
+													onClick={() => handleOpenEditTransaction(value.id)}
+												>
+													<img src={editImage} alt="Editar" />
+												</button>
+											</Tooltip>
+										</div>
+										<div className={`${value.type} stylePrice`}>
+											{" "}
+											{
+												new Intl.NumberFormat("pt-BR", {
+													style: "currency",
+													currency: "BRL",
+												}).format(value.price as unknown as number)
+											}
+										</div>
+										<div className="styleCategory">{value.category}</div>
+										<div className="styleCreatedAt">
+											{" "}
+											{new Intl.DateTimeFormat("pt-BR").format(
+												new Date(value.createdAt),
+											)}
+										</div>
+									</div>
+								)
+							})}
+						</div>
 					</>
 				) : (
 					<>
