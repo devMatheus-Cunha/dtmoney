@@ -123,20 +123,37 @@ export function Home() {
 						);
 					})
 			} catch (error) {
-				toast.error(
-					<ToastNotification
-						type={alertImg}
-						content="Este email não existe no sistema!"
-					/>, {
-						position: "top-right",
-						autoClose: 3000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-					},
-				);
+				if (error.message === "We have blocked all requests from this device due to unusual activity. Try again later.") {
+					toast.error(
+						<ToastNotification
+							type={alertImg}
+							content="Limite para resetar senha atingido! Tente mais tarde"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
+				} else {
+					toast.error(
+						<ToastNotification
+							type={alertImg}
+							content="Este email não existe no sistema!"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
+				}
 			}
 		},
 		[emailUser],
