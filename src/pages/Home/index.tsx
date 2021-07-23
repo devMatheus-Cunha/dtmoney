@@ -123,7 +123,7 @@ export function Home() {
 						);
 					}
 				})
-				.catch((error) => {
+				.catch(() => {
 					toast.error(
 						<ToastNotification
 							type={checkImg}
