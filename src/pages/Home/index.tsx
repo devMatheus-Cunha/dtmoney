@@ -101,27 +101,25 @@ export function Home() {
 	);
 
 	// functions
-	const reset = useCallback(
+	const recoverPassoword = useCallback(
 		async (event) => {
 			event.preventDefault();
 			firebase.auth().sendPasswordResetEmail(emailUser)
 				.then(() => {
-					if (passwordUser.length > 0) {
-						toast.success(
-							<ToastNotification
-								type={checkImg}
-								content="Acesse seu email para redefinir sua senha!"
-							/>, {
-								position: "top-right",
-								autoClose: 3000,
-								hideProgressBar: false,
-								closeOnClick: true,
-								pauseOnHover: true,
-								draggable: true,
-								progress: undefined,
-							},
-						);
-					}
+					toast.success(
+						<ToastNotification
+							type={checkImg}
+							content="Acesse seu email para redefinir sua senha!"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
 				})
 				.catch(() => {
 					toast.error(
@@ -140,7 +138,7 @@ export function Home() {
 					);
 				});
 		},
-		[emailUser, passwordUser.length],
+		[emailUser],
 	);
 
 	if (user) {
@@ -199,7 +197,7 @@ export function Home() {
 												required
 												onChange={(event) => setEmailUser(event.target.value)}
 											/>
-											<button type="submit" onClick={reset}>Redefinir</button>
+											<button type="submit" onClick={recoverPassoword}>Redefinir</button>
 										</ContainerInput>
 									</>
 								)
