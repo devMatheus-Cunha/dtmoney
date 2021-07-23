@@ -202,8 +202,7 @@ export const ContainerDeleteTrasaction = styled.div`
       filter: brightness(0.9)
     }
   }
-  
-  `
+`
 export const ContainerInformation = styled.div`
   display: flex;
   align-items:center;
