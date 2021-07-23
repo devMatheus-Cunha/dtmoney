@@ -4,6 +4,7 @@ import {
 } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import firebase from "firebase";
 import { AuthContext } from "../../contexts/AuthContext";
 
 // container
@@ -29,6 +30,9 @@ import {
 export function Home() {
 	const history = useHistory()
 	const { user } = useContext(AuthContext)
+
+	const [recoverPassowd, setRecoverPassowd] = useState(true)
+
 	// State
 	const [emailUser, setEmailUser] = useState<string>("")
 	const [passwordUser, setPasswordUser] = useState<string>("")
@@ -96,6 +100,49 @@ export function Home() {
 		[emailUser, history, passwordUser, user?.id],
 	);
 
+	// functions
+	const reset = useCallback(
+		async (event) => {
+			event.preventDefault();
+			firebase.auth().sendPasswordResetEmail(emailUser)
+				.then(() => {
+					if (passwordUser.length > 0) {
+						toast.success(
+							<ToastNotification
+								type={checkImg}
+								content="Acesse seu email para redefinir sua senha!"
+							/>, {
+								position: "top-right",
+								autoClose: 3000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: true,
+								progress: undefined,
+							},
+						);
+					}
+				})
+				.catch((error) => {
+					toast.error(
+						<ToastNotification
+							type={checkImg}
+							content="Este email não existe no sistema!"
+						/>, {
+							position: "top-right",
+							autoClose: 3000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						},
+					);
+				});
+		},
+		[emailUser, passwordUser.length],
+	);
+
 	if (user) {
 		return <Redirect to={`/transactions/${user.id}`} />
 	}
@@ -112,24 +159,51 @@ export function Home() {
 							<img src={logo} alt="" />
 						</LogoWrapper>
 						<Form onSubmit={loginHandler}>
-							<h3>Fazer Login</h3>
-							<ContainerInput>
-								<StyledInput
-									placeholder="Digite seu email..."
-									type="email"
-									required
-									onChange={(event) => setEmailUser(event.target.value)}
-								/>
-
-								<StyledInput
-									placeholder="Digite sua senha..."
-									type="password"
-									required
-									onChange={(event) => setPasswordUser(event.target.value)}
-								/>
-							</ContainerInput>
-
-							<button type="submit">Login</button>
+							{
+								recoverPassowd ? (
+									<>
+										<h3>Fazer Login</h3>
+										<ContainerInput>
+											<p>E-mail*</p>
+											<StyledInput
+												placeholder="Digite seu email..."
+												type="email"
+												required
+												onChange={(event) => setEmailUser(event.target.value)}
+											/>
+											<div>
+												<p>Senha*</p>
+												<button type="button" onClick={() => setRecoverPassowd(false)}>Redefinir senha</button>
+											</div>
+											<StyledInput
+												placeholder="Digite sua senha..."
+												type="password"
+												required
+												onChange={(event) => setPasswordUser(event.target.value)}
+											/>
+											<button type="submit">Login</button>
+										</ContainerInput>
+									</>
+								) : (
+									<>
+										<h3>Esqueceu sua senha?</h3>
+										<h4>Digite seu e-mail para recuperar sua senha.</h4>
+										<ContainerInput>
+											<div>
+												<p>E-mail*</p>
+												<button type="button" onClick={() => setRecoverPassowd(true)}>Login</button>
+											</div>
+											<StyledInput
+												placeholder="Digite seu email..."
+												type="email"
+												required
+												onChange={(event) => setEmailUser(event.target.value)}
+											/>
+											<button type="submit" onClick={reset}>Redefinir</button>
+										</ContainerInput>
+									</>
+								)
+							}
 						</Form>
 						<div>
 							<h4>
