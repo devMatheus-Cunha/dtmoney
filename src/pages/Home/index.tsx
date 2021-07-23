@@ -124,7 +124,7 @@ export function Home() {
 				.catch(() => {
 					toast.error(
 						<ToastNotification
-							type={checkImg}
+							type={alertImg}
 							content="Este email não existe no sistema!"
 						/>, {
 							position: "top-right",
