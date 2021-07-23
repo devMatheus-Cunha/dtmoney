@@ -104,39 +104,40 @@ export function Home() {
 	const recoverPassoword = useCallback(
 		async (event) => {
 			event.preventDefault();
-			firebase.auth().sendPasswordResetEmail(emailUser)
-				.then(() => {
-					toast.success(
-						<ToastNotification
-							type={checkImg}
-							content="Acesse seu email para redefinir sua senha!"
-						/>, {
-							position: "top-right",
-							autoClose: 3000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-						},
-					);
-				})
-				.catch(() => {
-					toast.error(
-						<ToastNotification
-							type={alertImg}
-							content="Este email não existe no sistema!"
-						/>, {
-							position: "top-right",
-							autoClose: 3000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-						},
-					);
-				});
+			try {
+				await	firebase.auth().sendPasswordResetEmail(emailUser)
+					.then(() => {
+						toast.success(
+							<ToastNotification
+								type={checkImg}
+								content="Acesse seu email para redefinir sua senha!"
+							/>, {
+								position: "top-right",
+								autoClose: 3000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: true,
+								progress: undefined,
+							},
+						);
+					})
+			} catch (error) {
+				toast.error(
+					<ToastNotification
+						type={alertImg}
+						content="Este email não existe no sistema!"
+					/>, {
+						position: "top-right",
+						autoClose: 3000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					},
+				);
+			}
 		},
 		[emailUser],
 	);
