@@ -144,8 +144,8 @@ export function Create() {
 									type="password"
 									onChange={(event) => setPasswordUser(event.target.value)}
 								/>
+								<button type="submit">Criar</button>
 							</ContainerInput>
-							<button type="submit">Criar</button>
 						</Form>
 						<div>
 							<h4>
