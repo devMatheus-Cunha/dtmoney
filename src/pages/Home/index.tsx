@@ -4,14 +4,16 @@ import {
 } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+
+// detabase
 import firebase from "firebase";
+import { authConfig } from "../../services/firebase";
+
+// context
 import { AuthContext } from "../../contexts/AuthContext";
 
 // container
 import { ToastNotification } from "../../container/Toast"
-
-// detabase
-import { authConfig } from "../../services/firebase";
 
 // images
 import alertImg from "../../assets/images/alert-circle.svg"
@@ -29,14 +31,17 @@ import {
 // -------------------------------------------------
 export function Home() {
 	const history = useHistory()
+
+	// context
 	const { user } = useContext(AuthContext)
 
 	const [recoverPassowd, setRecoverPassowd] = useState(true)
 
-	// State
+	// state
 	const [emailUser, setEmailUser] = useState<string>("")
 	const [passwordUser, setPasswordUser] = useState<string>("")
 
+	// functions
 	const loginHandler = useCallback(
 		async (event) => {
 			event.preventDefault();
@@ -100,7 +105,6 @@ export function Home() {
 		[emailUser, history, passwordUser, user?.id],
 	);
 
-	// functions
 	const recoverPassoword = useCallback(
 		async (event) => {
 			event.preventDefault();

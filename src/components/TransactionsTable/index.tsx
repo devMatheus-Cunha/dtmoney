@@ -2,10 +2,10 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import { Tooltip } from "@material-ui/core";
-import editImage from "../../assets/images/edit-2.svg";
 
 // image
 import trashImage from "../../assets/images/trash-2.svg";
+import editImage from "../../assets/images/edit-2.svg";
 
 // hooks
 import { useTransactions } from "../../hooks/useTransactions";
@@ -31,7 +31,7 @@ export function TransactionsTable({
 	// hooks
 	const { transactions } = useTransactions(idTransactionRoute)
 
-	// State
+	// state
 	const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
 	const [deleteTransactionModalOpen, setDeleteTransactionModalOpen] = useState(false);
 	const [clearTableModalOpen, setClearTableModalOpen] = useState(false);
